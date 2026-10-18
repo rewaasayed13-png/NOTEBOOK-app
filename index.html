@@ -1,0 +1,176 @@
+<!doctype html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="theme-color" content="#12143A">
+<link rel="icon" href="logo.svg" type="image/svg+xml">
+<link rel="manifest" href="manifest.webmanifest">
+<link rel="apple-touch-icon" href="icon-192.png">
+<title>مكتبتي</title>
+<style>
+*{box-sizing:border-box}
+:root{--amber:#F5B544;--ink:#F4F1FF;--mute:#B9B6E0;--line:#4A4FB0}
+body{margin:0;font-family:'Segoe UI',Tahoma,system-ui,sans-serif;background:linear-gradient(180deg,#12143A,#1D2160) fixed;color:var(--ink);min-height:100vh;padding-bottom:calc(96px + env(safe-area-inset-bottom,0px))}
+button,textarea{font-family:inherit}
+.b{min-height:44px;padding:0 18px;border-radius:999px;border:1px solid var(--line);background:transparent;color:var(--ink);font-size:15px;cursor:pointer}
+.b:hover{border-color:var(--amber)}
+.b.on,.b.pri{background:var(--amber);border-color:var(--amber);color:#1B1740;font-weight:700}
+.b.red{color:#FF9A9A;border-color:#FF9A9A}
+label.b{display:inline-flex;align-items:center}
+input[type=file]{position:absolute;width:1px;height:1px;opacity:0}
+header{position:sticky;top:0;z-index:6;display:flex;flex-wrap:wrap;gap:10px;align-items:center;justify-content:space-between;padding:12px 20px;background:#12143Aee;backdrop-filter:blur(8px);border-bottom:1px solid #2E3290}
+.brand{display:flex;align-items:center;gap:12px}
+h1{margin:0;font-size:22px;letter-spacing:.3px}
+#lib{max-width:1100px;margin:0 auto;padding:28px 24px;display:grid;grid-template-columns:repeat(auto-fill,minmax(170px,1fr));gap:26px}
+#lib>p{grid-column:1/-1;text-align:center;color:var(--mute);font-size:18px;line-height:2;padding:40px 0}
+.card{display:flex;flex-direction:column;gap:10px}
+.cover{position:relative;height:230px;border-radius:6px 14px 14px 6px;color:#fff;font-size:19px;font-weight:700;line-height:1.5;padding:18px 16px;display:flex;align-items:flex-end;cursor:pointer;word-break:break-word;box-shadow:inset -12px 0 0 #0003,0 12px 24px #0006}
+.cover::before{content:"";position:absolute;top:0;left:20px;width:16px;height:38px;background:var(--amber);clip-path:polygon(0 0,100% 0,100% 100%,50% 78%,0 100%)}
+#msg{margin:16px 20px 0;padding:12px 16px;background:var(--amber);color:#1B1740;border-radius:12px}
+#rd{padding:16px 12px}
+.pg{position:relative;background:#FFFDF7;color:#1F2430;margin:0 auto 18px;max-width:900px;border-radius:6px;box-shadow:0 10px 30px #0006}
+.pg canvas{display:block;width:100%;border-radius:6px}
+.tx{padding:28px;font-size:20px;line-height:2}.tx p{margin:0 0 18px}
+.ov,.nt{position:absolute;inset:0;width:100%;height:100%;pointer-events:none}
+body:not([data-tool=none]) .ov{pointer-events:auto;touch-action:none}
+.note{position:absolute;pointer-events:auto;width:190px;padding:6px;background:#FFE58A;color:#1F2430;border:1px solid #C9A82A;border-radius:10px;display:flex;flex-direction:column;gap:6px;transform:translate(-50%,-10px)}
+.note textarea{min-height:64px;border:0;background:transparent;font-size:16px;color:#1F2430}
+.note div{display:flex;gap:6px}.note .b{min-height:36px;padding:0 8px;font-size:13px;flex:1;background:#fff;color:#1F2430;border-color:#9C8420}.note .b.red{color:#A23B3B}
+#bar{position:fixed;inset:auto 0 0 0;display:flex;flex-wrap:wrap;gap:8px;justify-content:center;align-items:center;padding:10px 12px calc(10px + env(safe-area-inset-bottom,0px));background:#12143Af2;backdrop-filter:blur(10px);border-top:2px solid var(--amber);z-index:5}
+#lbl{min-width:96px;text-align:center;color:var(--mute);font-size:14px}
+#panel{position:fixed;inset:auto 0 0 0;bottom:calc(68px + env(safe-area-inset-bottom,0px));max-height:55vh;overflow-y:auto;padding:16px 20px;background:#1B1F57;border-radius:22px 22px 0 0;border-top:1px solid var(--line);box-shadow:0 -8px 30px #0008;z-index:4}
+.row{display:flex;flex-wrap:wrap;gap:8px;align-items:center;margin-bottom:10px}
+.sw{width:44px;height:44px;border-radius:50%;border:2px solid #FFFFFF55;cursor:pointer}.sw.sq{border-radius:12px}
+.it{display:flex;flex-wrap:wrap;gap:10px;align-items:center;padding:10px 0;border-bottom:1px solid #3A3F8F}.it span{flex:1 1 220px;font-size:17px}
+#nbt{width:100%;min-height:220px;padding:12px;border:0;border-radius:10px;background:#FFFDF7cc;color:#1F2430;font-size:18px;line-height:1.8}
+[hidden]{display:none!important}
+</style>
+</head>
+<body data-tool="none">
+<header><div class="brand"><svg width="42" height="42" viewBox="0 0 64 64" aria-hidden="true"><defs><linearGradient id="lg" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#4348B8"/><stop offset="1" stop-color="#12143A"/></linearGradient></defs><rect width="64" height="64" rx="16" fill="url(#lg)"/><path d="M32 20C26 16 18 16 12 18V44C18 42 26 42 32 46Z" fill="#F4F1FF"/><path d="M32 20C38 16 46 16 52 18V44C46 42 38 42 32 46Z" fill="#D7D2F4"/><path d="M38 13H46V30L42 26L38 30Z" fill="#F5B544"/><circle cx="19" cy="11" r="2.2" fill="#F5B544"/></svg><h1 id="ttl">مكتبتي</h1></div><div class="row" style="margin:0"><button class="b" id="inst" hidden>تثبيت التطبيق</button><label class="b pri">إضافة كتاب (PDF أو نص)<input id="add" type="file" accept=".pdf,.txt,.md,application/pdf,text/plain" multiple></label></div></header>
+<p id="msg" hidden></p>
+<main id="lib"></main>
+<main id="rd" hidden><div id="pages"></div></main>
+<section id="panel" hidden></section>
+<nav id="bar" hidden>
+<button class="b" id="home">الكتب</button><button class="b" id="pv">السابقة</button><span id="lbl"></span><button class="b" id="nx">التالية</button><button class="b" id="pen">القلم والأدوات</button>
+</nav>
+<script>
+const CDN='https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/';
+const $=s=>document.querySelector(s);
+const S={tool:'none',color:'#FFE680',tab:'tools',cur:0,io:null};
+const dbp=new Promise((ok,no)=>{const r=indexedDB.open('reader',1);r.onupgradeneeded=()=>{r.result.createObjectStore('books',{keyPath:'id'});r.result.createObjectStore('meta',{keyPath:'id'})};r.onsuccess=()=>ok(r.result);r.onerror=()=>no(r.error)});
+const tx=async(st,m,fn)=>{const d=await dbp;return new Promise((ok,no)=>{const t=d.transaction(st,m);const q=fn(t.objectStore(st));t.oncomplete=()=>ok(q&&q.result);t.onerror=()=>no(t.error)})};
+const get=(st,k)=>tx(st,'readonly',s=>s.get(k)),put=(st,v)=>tx(st,'readwrite',s=>s.put(v)),all=st=>tx(st,'readonly',s=>s.getAll()),del=(st,k)=>tx(st,'readwrite',s=>s.delete(k));
+let pt;const persist=()=>{clearTimeout(pt);pt=setTimeout(()=>put('meta',S.meta),300)};
+const msg=t=>{const m=$('#msg');m.textContent=t||'';m.hidden=!t};
+const COLORS=['linear-gradient(145deg,#2F8F8A,#14504D)','linear-gradient(145deg,#C0703F,#6E331A)','linear-gradient(145deg,#5560D8,#262B80)','linear-gradient(145deg,#A25BB0,#4B2358)'];
+async function lib(){
+ const bs=(await all('books')).sort((a,b)=>a.created-b.created);const L=$('#lib');L.innerHTML='';
+ if(!bs.length){L.innerHTML='<p>مكتبتك فاضية لسه.<br>دوسي «إضافة كتاب» واختاري ملف PDF أو نص من الموبايل.</p>';return}
+ bs.forEach((b,i)=>{const c=document.createElement('div');c.className='card';c.innerHTML='<div class="cover"></div><button class="b red">حذف</button>';
+ const cv=c.firstChild;cv.textContent=b.name;cv.style.background=COLORS[i%4];cv.onclick=()=>openBook(b.id);
+ c.lastChild.onclick=async()=>{if(confirm('حذف «'+b.name+'» وكل ملاحظاته؟')){await del('books',b.id);await del('meta',b.id);lib()}};L.appendChild(c)});
+}
+$('#add').onchange=async e=>{
+ for(const f of e.target.files){const pdf=/\.pdf$/i.test(f.name)||f.type==='application/pdf';
+ await put('books',{id:crypto.randomUUID(),name:f.name.replace(/\.[^.]+$/,''),type:pdf?'pdf':'txt',blob:f,created:Date.now()})}
+ e.target.value='';navigator.storage&&navigator.storage.persist&&navigator.storage.persist();lib();
+};
+function pdfLib(){
+ if(window.pdfjsLib)return Promise.resolve();
+ const L=src=>new Promise((ok,no)=>{const s=document.createElement('script');s.src=src;s.onload=ok;s.onerror=no;document.head.appendChild(s)});
+ return L('lib/pdf.min.js').then(()=>'lib/pdf.worker.min.js').catch(()=>L(CDN+'pdf.min.js').then(()=>CDN+'pdf.worker.min.js')).then(w=>{pdfjsLib.GlobalWorkerOptions.workerSrc=w});
+}
+async function openBook(id){
+ msg('');const b=await get('books',id);S.b=b;
+ S.meta=(await get('meta',id))||{id,ann:[],saved:[],quotes:[],last:0,nb:{cur:0,pages:[{bg:'#FFFFFF',img:'',text:''}]}};
+ $('#lib').hidden=true;$('#rd').hidden=false;$('#bar').hidden=false;$('#ttl').textContent=b.name;$('#pages').innerHTML='';
+ S.io&&S.io.disconnect();S.pgs=[];
+ try{
+ if(b.type==='pdf'){await pdfLib();S.pdf=await pdfjsLib.getDocument({data:await b.blob.arrayBuffer()}).promise;
+  const v=(await S.pdf.getPage(1)).getViewport({scale:1});
+  S.io=new IntersectionObserver(es=>es.forEach(x=>{if(x.isIntersecting&&!x.target.dataset.r){x.target.dataset.r=1;renderPdf(x.target)}}),{rootMargin:'700px'});
+  for(let i=0;i<S.pdf.numPages;i++)mk(i,'<canvas></canvas>',v.width+'/'+v.height);
+ }else{
+  const ps=(await b.blob.text()).split(/\n+/).map(t=>t.trim()).filter(Boolean);const pages=[];let c=[],n=0;
+  ps.forEach(t=>{c.push(t);n+=t.length;if(n>900){pages.push(c);c=[];n=0}});if(c.length)pages.push(c);
+  pages.forEach((p,i)=>{const d=mk(i,'<div class="tx"></div>');p.forEach(t=>{const e=document.createElement('p');e.textContent=t;d.querySelector('.tx').appendChild(e)});renderOv(d)});
+ }}catch(err){msg('مقدرتش أفتح الكتاب ده: '+err.message);return}
+ const track=new IntersectionObserver(es=>es.forEach(x=>{if(x.isIntersecting){S.cur=+x.target.dataset.i;S.meta.last=S.cur;lbl();persist()}}),{threshold:.5});
+ S.pgs.forEach(p=>track.observe(p));S.track=track;
+ if(S.meta.last)S.pgs[S.meta.last]&&S.pgs[S.meta.last].scrollIntoView();lbl();
+}
+function mk(i,inner,ratio){
+ const d=document.createElement('div');d.className='pg';d.dataset.i=i;if(ratio)d.style.aspectRatio=ratio;
+ d.innerHTML=inner+'<svg class="ov"></svg><div class="nt"></div>';$('#pages').appendChild(d);S.pgs.push(d);S.io&&S.io.observe(d);
+ d.querySelector('svg').addEventListener('pointerdown',e=>down(e,d));return d;
+}
+async function renderPdf(d){
+ const page=await S.pdf.getPage(+d.dataset.i+1);const v0=page.getViewport({scale:1});const sc=d.clientWidth/v0.width;const dpr=Math.min(devicePixelRatio||1,2);
+ const v=page.getViewport({scale:sc*dpr});const c=d.querySelector('canvas');c.width=v.width;c.height=v.height;d.style.aspectRatio=v0.width+'/'+v0.height;
+ await page.render({canvasContext:c.getContext('2d'),viewport:v}).promise;renderOv(d);
+}
+const lbl=()=>{$('#lbl').textContent='صفحة '+(S.cur+1)+' من '+(S.pgs?S.pgs.length:0)};
+const go=n=>{const p=S.pgs[Math.max(0,Math.min(S.pgs.length-1,n))];p&&p.scrollIntoView({behavior:'smooth'})};
+$('#pv').onclick=()=>go(S.cur-1);$('#nx').onclick=()=>go(S.cur+1);
+$('#home').onclick=()=>{$('#rd').hidden=true;$('#bar').hidden=true;$('#panel').hidden=true;$('#lib').hidden=false;$('#ttl').textContent='مكتبتي';lib()};
+function renderOv(d){
+ const i=+d.dataset.i,H=1000*d.clientHeight/d.clientWidth,svg=d.querySelector('svg'),nt=d.querySelector('.nt');
+ svg.setAttribute('viewBox','0 0 1000 '+H);nt.innerHTML='';let s='';
+ S.meta.ann.forEach(a=>{if(a.pg!==i)return;const X=a.x*1000,Y=a.y*H;
+  if(a.t==='pen'||a.t==='hl')s+=`<polyline points="${a.p.map(q=>Math.round(q[0]*1000)+','+Math.round(q[1]*H)).join(' ')}" fill="none" stroke="${a.c}" stroke-width="${a.t==='hl'?22:3}" stroke-opacity="${a.t==='hl'?.45:1}" stroke-linecap="round" stroke-linejoin="round"/>`;
+  else{const st='fill="none" stroke="#C2362B" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"';
+   if(a.t==='circle')s+=`<ellipse cx="${X}" cy="${Y}" rx="45" ry="45" ${st}/>`;
+   if(a.t==='rect')s+=`<rect x="${X-60}" y="${Y-40}" width="120" height="80" rx="6" ${st}/>`;
+   if(a.t==='arrow')s+=`<path d="M${X-60} ${Y}H${X+60}M${X+40} ${Y-18}L${X+60} ${Y}L${X+40} ${Y+18}" ${st}/>`;
+   if(a.t==='note'){const n=document.createElement('div');n.className='note';n.style.left=a.x*100+'%';n.style.top=a.y*100+'%';
+    n.innerHTML='<textarea aria-label="ملاحظة"></textarea><div><button class="b">حفظ</button><button class="b red">حذف</button></div>';
+    const ta=n.querySelector('textarea');ta.value=a.text||'';ta.oninput=()=>{a.text=ta.value;persist()};
+    n.querySelectorAll('button')[0].onclick=()=>{if(a.text){S.meta.saved.push(a.text);persist();panel();msg('')}};
+    n.querySelectorAll('button')[1].onclick=()=>{S.meta.ann.splice(S.meta.ann.indexOf(a),1);persist();renderOv(d)};nt.appendChild(n)}}});
+ svg.innerHTML=s;
+}
+function down(e,d){
+ const t=S.tool;if(t==='none')return;const r=d.getBoundingClientRect(),svg=e.currentTarget,i=+d.dataset.i;
+ const P=ev=>[(ev.clientX-r.left)/r.width,(ev.clientY-r.top)/r.height],[x,y]=P(e),H=1000*r.height/r.width;
+ if(t==='pen'||t==='hl'){e.preventDefault();svg.setPointerCapture(e.pointerId);const a={pg:i,t,c:t==='pen'?'#1F2430':S.color,p:[[x,y]]};S.meta.ann.push(a);
+  const mv=ev=>{a.p.push(P(ev));renderOv(d)},up=()=>{svg.removeEventListener('pointermove',mv);svg.removeEventListener('pointerup',up);svg.removeEventListener('pointercancel',up);persist()};
+  svg.addEventListener('pointermove',mv);svg.addEventListener('pointerup',up);svg.addEventListener('pointercancel',up);renderOv(d);return}
+ if(t==='erase'){const k=S.meta.ann.findIndex(a=>a.pg===i&&(a.p?a.p.some(q=>Math.hypot((q[0]-x)*1000,(q[1]-y)*H)<35):Math.hypot((a.x-x)*1000,(a.y-y)*H)<70));
+  if(k>=0){S.meta.ann.splice(k,1);persist();renderOv(d)}return}
+ if(t==='quote'){const p=document.elementsFromPoint(e.clientX,e.clientY).find(el=>el.tagName==='P');
+  if(p){S.meta.quotes.push(p.textContent);persist();panel();msg('تم حفظ الاقتباس.')}else msg('الاقتباس بيشتغل على الكتب النصية. في الـ PDF استخدمي «ملاحظة».');return}
+ S.meta.ann.push({pg:i,t,x,y,text:''});persist();renderOv(d);
+}
+const TOOLS=[['none','قراءة / تمرير'],['pen','قلم'],['hl','هايلايتر'],['quote','اقتباس'],['note','ملاحظة'],['arrow','سهم'],['circle','دايرة'],['rect','مربع'],['erase','مسح']];
+const HX=['#FFE680','#BFE8C0','#BFDDF5','#F7C6D9','#FFD3A6'],BG=['#FFFFFF','#F6EBD0','#E6E8EC','#DCEBFA','#DDF1DF','#9AA3B2'];
+function panel(){
+ const p=$('#panel');if(p.hidden)return;const m=S.meta,n=m.nb,pg=n.pages[n.cur];
+ const tabs=[['tools','الأدوات'],['nb','النوت بوك'],['saved','المحفوظات'],['quotes','الاقتباسات']].map(([k,l])=>`<button class="b ${S.tab===k?'on':''}" data-a="tab" data-v="${k}">${l}</button>`).join('');
+ let h=`<div class="row">${tabs}</div>`;
+ if(S.tab==='tools')h+=`<div class="row">${TOOLS.map(([k,l])=>`<button class="b ${S.tool===k?'on':''}" data-a="tool" data-v="${k}">${l}</button>`).join('')}</div><div class="row"><span>لون الهايلايتر:</span>${HX.map(c=>`<button class="sw" aria-label="لون" data-a="col" data-v="${c}" style="background:${c};${S.color===c?'border:3px solid #F5B544':''}"></button>`).join('')}</div><p style="font-size:14px;margin:0">اختاري أداة وارسمي أو دوسي على الصفحة. للرجوع للتمرير اختاري «قراءة / تمرير».</p>`;
+ if(S.tab==='saved'||S.tab==='quotes'){const L=S.tab==='saved'?m.saved:m.quotes;h+=L.length?L.map((t,i)=>`<div class="it"><span></span><button class="b red" data-a="rm" data-v="${i}">حذف</button></div>`).join(''):'<p>لسه فاضي.</p>'}
+ if(S.tab==='nb'){h+=`<div class="row"><button class="b" data-a="np">السابقة</button><span>صفحة ${n.cur+1} من ${n.pages.length}</span><button class="b" data-a="nn">التالية</button><button class="b" data-a="na">+ صفحة جديدة</button><button class="b red" data-a="nd">حذف الصفحة</button></div><div class="row"><span>الخلفية:</span>${BG.map(c=>`<button class="sw sq" aria-label="خلفية" data-a="bg" data-v="${c}" style="background:${c}"></button>`).join('')}<label class="b">صورة من الموبايل<input type="file" accept="image/*" id="bgi"></label><button class="b" data-a="bn">شيل الصورة</button></div><div style="padding:12px;border:1px solid #D9D2C3;border-radius:10px;background-color:${pg.bg};${pg.img?`background-image:url(${pg.img});background-size:cover;background-position:center`:''}"><textarea id="nbt" aria-label="صفحة النوت بوك"></textarea></div>`}
+ p.innerHTML=h;
+ if(S.tab!=='nb'){const L=S.tab==='saved'?m.saved:m.quotes;p.querySelectorAll('.it span').forEach((s,i)=>s.textContent=L[i])}
+ else{const t=$('#nbt');t.value=pg.text;t.oninput=()=>{pg.text=t.value;persist()};
+  $('#bgi').onchange=e=>{const f=e.target.files[0];if(!f)return;createImageBitmap(f).then(im=>{const k=Math.min(1,1200/Math.max(im.width,im.height)),c=document.createElement('canvas');c.width=im.width*k;c.height=im.height*k;c.getContext('2d').drawImage(im,0,0,c.width,c.height);pg.img=c.toDataURL('image/jpeg',.8);persist();panel()}).catch(()=>msg('مقدرتش أقرأ الصورة دي.'))}}
+}
+$('#panel').onclick=e=>{const b=e.target.closest('[data-a]');if(!b)return;const a=b.dataset.a,v=b.dataset.v,n=S.meta.nb,pg=n.pages[n.cur];
+ if(a==='tab')S.tab=v;if(a==='tool'){S.tool=v;document.body.dataset.tool=v}if(a==='col'){S.color=v;S.tool='hl';document.body.dataset.tool='hl'}
+ if(a==='rm'){(S.tab==='saved'?S.meta.saved:S.meta.quotes).splice(+v,1)}
+ if(a==='np')n.cur=Math.max(0,n.cur-1);if(a==='nn')n.cur=Math.min(n.pages.length-1,n.cur+1);
+ if(a==='na'){n.pages.push({bg:'#FFFFFF',img:'',text:''});n.cur=n.pages.length-1}
+ if(a==='nd'&&n.pages.length>1){n.pages.splice(n.cur,1);n.cur=Math.max(0,n.cur-1)}
+ if(a==='bg')pg.bg=v;if(a==='bn')pg.img='';
+ persist();panel()};
+$('#pen').onclick=()=>{const p=$('#panel');p.hidden=!p.hidden;$('#pen').classList.toggle('on',!p.hidden);panel()};
+let dp;addEventListener('beforeinstallprompt',e=>{e.preventDefault();dp=e;$('#inst').hidden=false});
+$('#inst').onclick=()=>{dp&&dp.prompt();$('#inst').hidden=true};
+if('serviceWorker'in navigator)navigator.serviceWorker.register('sw.js').catch(()=>{});
+lib();
+</script>
+</body>
+</html>
