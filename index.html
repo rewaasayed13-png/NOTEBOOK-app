@@ -62,6 +62,28 @@ input[type=color]::-webkit-color-swatch-wrapper{padding:0}input[type=color]::-we
 #nbt{width:100%;height:calc(100vh - 300px);height:calc(100dvh - 300px);min-height:320px;padding:12px;border:0;border-radius:10px;background:#FFFDF7cc;color:#1F2430;font-size:18px;line-height:1.8}
 [hidden]{display:none!important}
 </style>
+<style>
+/* تحسينات الشكل: خلفية مثقفة + ستايل NotebookLM */
+:root{--line:#3C4F68}
+body{background:repeating-linear-gradient(90deg,rgba(255,255,255,.03) 0 2px,transparent 2px 56px),radial-gradient(ellipse at 50% -10%,#3A5068 0%,#1B2636 48%,#101722 100%) fixed}
+header,.sh{background:#101722ee;border-bottom-color:#2C3C52}
+.sh{border-bottom:2px solid var(--amber)}
+#bar{background:#101722f2}
+#panel{background:#172231;border-radius:28px 28px 0 0}
+#sheet{background:radial-gradient(ellipse at 50% -10%,#3A5068 0%,#1B2636 48%,#101722 100%)}
+.cover{border-radius:6px 18px 18px 6px}
+.pg,.pg canvas{border-radius:14px}
+.pg{box-shadow:0 18px 50px -20px #000c}
+.qc{border-radius:22px}
+.note{border-radius:16px}
+.nbw{border-radius:20px}
+.it{border-bottom-color:#2C3C52}
+#msg{position:fixed;top:78px;left:50%;transform:translateX(-50%);z-index:30;margin:0;padding:10px 22px;border-radius:999px;box-shadow:0 10px 30px #0008;animation:tp .25s ease}
+@keyframes tp{from{opacity:0;transform:translate(-50%,-8px)}to{opacity:1;transform:translate(-50%,0)}}
+.nh button{transition:transform .15s,background .2s}
+.nh .sv.pop{background:#1F8A5B;color:#fff;border-radius:50%;animation:pp .3s ease}
+@keyframes pp{50%{transform:scale(1.3)}}
+</style>
 </head>
 <body data-tool="none">
 <header><div class="brand"><svg width="42" height="42" viewBox="0 0 64 64" aria-hidden="true"><defs><linearGradient id="lg" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#4348B8"/><stop offset="1" stop-color="#12143A"/></linearGradient></defs><rect width="64" height="64" rx="16" fill="url(#lg)"/><path d="M32 20C26 16 18 16 12 18V44C18 42 26 42 32 46Z" fill="#F4F1FF"/><path d="M32 20C38 16 46 16 52 18V44C46 42 38 42 32 46Z" fill="#D7D2F4"/><path d="M38 13H46V30L42 26L38 30Z" fill="#F5B544"/><circle cx="19" cy="11" r="2.2" fill="#F5B544"/></svg><h1 id="ttl">مكتبتي</h1></div><div class="row" style="margin:0"><button class="b" id="inst" hidden>تثبيت التطبيق</button><label class="b pri">إضافة كتاب (PDF أو نص)<input id="add" type="file" accept=".pdf,.txt,.md,application/pdf,text/plain" multiple></label></div></header>
@@ -71,7 +93,7 @@ input[type=color]::-webkit-color-swatch-wrapper{padding:0}input[type=color]::-we
 <section id="panel" hidden></section>
 <section id="sheet" hidden></section>
 <nav id="bar" hidden>
-<button class="b" id="home">الكتب</button><button class="b" id="pv">السابقة</button><span id="lbl"></span><button class="b" id="nx">التالية</button><button class="b" id="pen">✏️ الأدوات</button><button class="b" id="qb">❝ الاقتباسات</button><button class="b" id="nbb">📓 النوت بوك</button>
+<button class="b" id="home">الكتب</button><button class="b" id="pv">السابقة</button><span id="lbl"></span><button class="b" id="nx">التالية</button><button class="b" id="pen">✏️ الأدوات</button><button class="b" id="qb">❝ الاقتباسات</button><button class="b" id="svb">🔖 المحفوظات</button><button class="b" id="nbb">📓 النوت بوك</button>
 </nav>
 <script>
 const CDN='https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/';
@@ -164,7 +186,7 @@ function sticky(a,d){
  ta.oninput=()=>{a.text=ta.value;persist()};
  ci.oninput=()=>{a.c=ci.value;fit();persist()};
  const sv=n.querySelector('.sv');
- if(q)sv.remove();else sv.onclick=()=>{if(a.text){S.meta.saved.push(a.text);persist();panel();msg('تم الحفظ في المحفوظات.');setTimeout(()=>msg(''),1800)}};
+ sv.onclick=()=>{if(!a.text){msg('اكتبي الأول وبعدين احفظي.');setTimeout(()=>msg(''),1800);return}if(S.meta.saved.includes(a.text)){msg('محفوظة قبل كده.')}else{S.meta.saved.push(a.text);persist();panel();msg('تم الحفظ في المحفوظات ✓')}sv.textContent='✓';sv.classList.add('pop');setTimeout(()=>{sv.textContent='💾';sv.classList.remove('pop');msg('')},1800)};
  n.querySelector('.x').onclick=()=>{if(!a.text||confirm('حذف؟')){S.meta.ann.splice(S.meta.ann.indexOf(a),1);persist();renderOv(d)}};
  const gesture=(el,fn)=>el.addEventListener('pointerdown',e=>{e.preventDefault();e.stopPropagation();el.setPointerCapture(e.pointerId);
   const r=d.getBoundingClientRect(),sx=e.clientX,sy=e.clientY,o={x:a.x,y:a.y,w:a.w,h:a.h};
@@ -228,11 +250,12 @@ function sheet(){
   el.innerHTML=`<div class="shw">${head('❝ الاقتباسات')}<p style="color:var(--mute);line-height:1.9">لإضافة اقتباس: ارجعي للكتاب ← «✏️ الأدوات» ← «❝ اقتباس» ← دوسي على المكان في الصفحة.</p>${Q.length?'':'<p>لسه مفيش اقتباسات.</p>'}<div id="ql"></div></div>`;
   const L=el.querySelector('#ql');
   Q.forEach(a=>{a.c=a.c||'#FFE680';const c=document.createElement('div');c.className='qc';
-   c.innerHTML='<div class="row" style="justify-content:space-between"><b></b><input type="color" aria-label="لون"></div><textarea aria-label="نص الاقتباس"></textarea><div class="row"><button class="b" data-g>اذهبي للصفحة</button><button class="b" data-c>نسخ</button><button class="b red" data-d>حذف</button></div>';
+   c.innerHTML='<div class="row" style="justify-content:space-between"><b></b><input type="color" aria-label="لون"></div><textarea aria-label="نص الاقتباس"></textarea><div class="row"><button class="b" data-g>اذهبي للصفحة</button><button class="b" data-s>حفظ</button><button class="b" data-c>نسخ</button><button class="b red" data-d>حذف</button></div>';
    const ta=c.querySelector('textarea'),ci=c.querySelector('input'),paint=()=>{c.style.background=a.c;c.style.color=inkOn(a.c)};
    c.querySelector('b').textContent=a.pg>=0?'صفحة '+(a.pg+1):'اقتباس قديم';ta.value=a.text||'';ci.value=a.c;paint();
    ta.oninput=()=>{a.text=ta.value;persist()};ci.oninput=()=>{a.c=ci.value;paint();persist()};
    const g=c.querySelector('[data-g]');if(a.pg<0)g.remove();else g.onclick=()=>{closeSheet();go(a.pg)};
+   c.querySelector('[data-s]').onclick=e=>{if(!a.text)return;if(!m.saved.includes(a.text)){m.saved.push(a.text);persist()}e.target.textContent='تم الحفظ ✓'};
    c.querySelector('[data-c]').onclick=e=>{navigator.clipboard&&navigator.clipboard.writeText(a.text||'').then(()=>{e.target.textContent='تم النسخ ✓'})};
    c.querySelector('[data-d]').onclick=()=>{if(confirm('حذف الاقتباس؟')){m.ann.splice(m.ann.indexOf(a),1);persist();sheet()}};
    L.appendChild(c)});
@@ -252,6 +275,7 @@ $('#sheet').onclick=e=>{if(e.target.closest('#shx'))return closeSheet();const b=
  if(a==='nd'&&n.pages.length>1){n.pages.splice(n.cur,1);n.cur=Math.max(0,n.cur-1)}
  if(a==='bg')pg.bg=v;if(a==='bn')pg.img='';
  persist();sheet()};
+$('#svb').onclick=()=>{S.tab='saved';const p=$('#panel');p.hidden=false;$('#pen').classList.add('on');panel()};
 $('#qb').onclick=()=>openSheet('quotes');$('#nbb').onclick=()=>openSheet('nb');
 let dp;addEventListener('beforeinstallprompt',e=>{e.preventDefault();dp=e;$('#inst').hidden=false});
 $('#inst').onclick=()=>{dp&&dp.prompt();$('#inst').hidden=true};
