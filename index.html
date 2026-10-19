@@ -3,15 +3,15 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-<meta name="theme-color" content="#0F1115">
+<meta name="theme-color" content="#121417">
 <link rel="icon" href="logo.svg" type="image/svg+xml">
 <link rel="manifest" href="manifest.webmanifest">
 <link rel="apple-touch-icon" href="icon-192.png">
 <title>Notebook</title>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700&family=Noto+Naskh+Arabic:wght@400;600&display=swap">
 <style>
-:root{color-scheme:light dark;--bg:#F6F7F9;--sf:#FFFFFF;--sf2:#EEF0F4;--ink:#1B1F27;--mute:#5F6877;--line:#E1E4EA;--ac:#2F6BFF;--acs:#E6EEFF;--acx:#FFFFFF;--hl:#FFD84D;--pg:#FFFFFF;--bk:#E9EBEF;--sh:0 1px 2px rgba(20,24,35,.06),0 10px 30px -14px rgba(20,24,35,.28)}
-@media(prefers-color-scheme:dark){:root{--bg:#0F1115;--sf:#171A20;--sf2:#1F232B;--ink:#EDEFF3;--mute:#9AA3B2;--line:#2A2F39;--ac:#8AB4F8;--acs:#1F2A44;--acx:#0F1115;--bk:#0B0C0F;--sh:0 1px 2px #0006,0 14px 34px -14px #000b}}
+:root{color-scheme:light dark;--bg:#F2EFE9;--sf:#FBF9F5;--sf2:#E9E4DA;--ink:#22201C;--mute:#6E675C;--line:#DDD6C8;--ac:#8C6A2F;--acs:#F1E7D2;--acx:#FFFFFF;--hl:#F2C14E;--hlm:rgba(242,193,78,.55);--pg:#FFFFFF;--bk:#E4DFD4;--sh:0 1px 2px rgba(34,32,28,.07),0 10px 30px -14px rgba(34,32,28,.3)}
+@media(prefers-color-scheme:dark){:root{--bg:#121417;--sf:#1B1E22;--sf2:#25292E;--ink:#EDE9E1;--mute:#9C968A;--line:#2D3238;--ac:#D9B25F;--acs:#2B2518;--acx:#16130C;--hlm:rgba(232,188,79,.55);--bk:#0C0D0F;--sh:0 1px 2px #0006,0 14px 34px -14px #000b}}
 *{box-sizing:border-box}
 html{-webkit-text-size-adjust:100%}
 body{margin:0;background:var(--bg);color:var(--ink);font-family:'Cairo',system-ui,'Segoe UI',Tahoma,sans-serif;line-height:1.6;-webkit-tap-highlight-color:transparent}
@@ -28,7 +28,7 @@ button{cursor:pointer}
 /* المكتبة */
 .top{position:sticky;top:0;z-index:5;display:flex;align-items:center;gap:12px;flex-wrap:wrap;padding:calc(14px + env(safe-area-inset-top,0px)) clamp(16px,4vw,40px) 14px;background:color-mix(in srgb,var(--bg) 88%,transparent);backdrop-filter:blur(14px);border-bottom:1px solid var(--line)}
 .brand{display:flex;align-items:center;gap:12px;margin-inline-end:auto}
-.brand img{width:40px;height:40px;border-radius:12px}
+.brand .mk{width:40px;height:40px}
 .brand b{font-size:20px;display:block;line-height:1.1;letter-spacing:.2px}
 .brand small{color:var(--mute);font-size:13px}
 .sr{position:relative;flex:1 1 220px;max-width:360px;order:3}
@@ -70,11 +70,19 @@ button{cursor:pointer}
 .hr{position:absolute;background:var(--hl);opacity:.6;border-radius:2px}
 .textLayer{overflow:hidden;line-height:1;direction:ltr}
 .textLayer span,.textLayer br{color:transparent;position:absolute;white-space:pre;transform-origin:0 0;cursor:text;-webkit-user-select:text;user-select:text}
-.textLayer ::selection{background:rgba(47,107,255,.32)}
+.textLayer ::selection{background:rgba(190,140,40,.35)}
 .pg.tp{background:var(--sf);padding:clamp(22px,5vw,52px);font-family:'Noto Naskh Arabic','Amiri',Georgia,serif;font-size:clamp(19px,2.3vw,22px);line-height:2.1}
 .pg.tp p{margin:0 0 1em;text-align:start}
-mark{background:rgba(255,216,77,.55);color:inherit;border-radius:3px;padding:0 1px;cursor:pointer}
-@media(prefers-color-scheme:dark){mark{background:#FFD84D;color:#1B1F27}}
+mark{background:var(--hlm);color:inherit;border-radius:3px;padding:0 1px;cursor:pointer}
+mark[data-z="1"]{background:linear-gradient(transparent 60%,var(--hlm) 60%);border-radius:0}
+mark[data-z="3"]{padding:.22em 3px;-webkit-box-decoration-break:clone;box-decoration-break:clone}
+@media(prefers-color-scheme:dark){mark[data-z="2"],mark[data-z="3"]{background:#E8BC4F;color:#1B1F27}}
+#sz::after{content:"";position:absolute;left:12px;right:12px;bottom:5px;height:calc(var(--z,2)*2px);border-radius:2px;background:var(--hl)}
+#szp{position:fixed;z-index:26;top:calc(60px + env(safe-area-inset-top,0px));inset-inline-end:54px;background:var(--sf);border:1px solid var(--line);border-radius:16px;box-shadow:var(--sh);padding:6px;display:flex;flex-direction:column;min-width:156px}
+#szp button{border:0;background:transparent;min-height:46px;padding:0 12px;border-radius:10px;display:flex;align-items:center;gap:12px;font-size:14px;font-weight:600;text-align:start}
+#szp button:hover{background:var(--sf2)}#szp button[aria-pressed=true]{background:var(--acs)}
+.sw{display:block;width:44px;border-radius:3px;background:var(--hl)}.s1{height:5px}.s2{height:12px}.s3{height:20px}
+
 .flash{animation:fl 1.6s ease}
 @keyframes fl{0%,60%{outline:3px solid var(--ac);outline-offset:2px}100%{outline:3px solid transparent}}
 /* لوحة التظليلات */
@@ -114,7 +122,7 @@ mark{background:rgba(255,216,77,.55);color:inherit;border-radius:3px;padding:0 1
 <body>
 <section id="lib">
 <header class="top">
-<div class="brand"><img src="logo.svg" alt=""><div><b>Notebook</b><small>المكتبة</small></div></div>
+<div class="brand"><svg class="mk" viewBox="0 0 40 40" aria-hidden="true"><rect width="40" height="40" rx="11" fill="var(--ac)"/><path d="M20 12c-3-2-7-2-9-1v17c2-1 6-1 9 1 3-2 7-2 9-1V11c-2-1-6-1-9 1zM20 12v17" fill="none" stroke="var(--acx)" stroke-width="2" stroke-linejoin="round" stroke-linecap="round"/></svg><div><b>Notebook</b></div></div>
 <button class="btn" id="inst" hidden>تثبيت التطبيق</button>
 <label class="btn pri"><svg class="ic" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 5v14M5 12h14"/></svg>إضافة كتاب<input id="add" type="file" accept=".pdf,.epub,.docx,.html,.htm,.xhtml,.md,.markdown,.txt,.cbz,application/pdf,text/plain" multiple></label>
 <div class="sr"><svg class="ic" viewBox="0 0 24 24" aria-hidden="true"><circle cx="11" cy="11" r="7"/><path d="M20 20l-4-4"/></svg><input id="q" type="search" placeholder="بحث في المكتبة" aria-label="بحث في المكتبة"></div>
@@ -127,6 +135,7 @@ mark{background:rgba(255,216,77,.55);color:inherit;border-radius:3px;padding:0 1
 <header id="rb">
 <button class="ib" id="back" aria-label="العودة إلى المكتبة"><svg class="ic" viewBox="0 0 24 24" aria-hidden="true"><path d="M9 6l6 6-6 6"/></svg></button>
 <div class="rt"><div id="ttl"></div><div id="pgl"></div></div>
+<button class="ib" id="sz" aria-label="حجم التظليل" aria-haspopup="true"><svg class="ic" viewBox="0 0 24 24" aria-hidden="true"><path d="M14 4l6 6-8 8-6-6z"/><path d="M4 21h8"/></svg></button>
 <button class="ib" id="hb" aria-label="التظليلات"><svg class="ic" viewBox="0 0 24 24" aria-hidden="true"><path d="M14 4l6 6-8 8-6-6z"/><path d="M4 21h8"/></svg><span id="hc" hidden></span></button>
 </header>
 <main id="pages"></main>
@@ -138,6 +147,7 @@ mark{background:rgba(255,216,77,.55);color:inherit;border-radius:3px;padding:0 1
 <div id="hl"></div>
 </aside>
 <div id="toast" role="status" aria-live="polite" hidden></div>
+<div id="szp" hidden role="menu"><button data-z="1" role="menuitem"><i class="sw s1"></i>رفيع</button><button data-z="2" role="menuitem"><i class="sw s2"></i>متوسط</button><button data-z="3" role="menuitem"><i class="sw s3"></i>عريض</button></div>
 <div id="pop" hidden><button>إزالة التظليل</button></div>
 
 <script>
@@ -163,16 +173,16 @@ async function lib(){const [bs,ms]=await Promise.all([all('books'),all('meta')])
  S.bs=bs.sort((a,b)=>((S.M[b.id]&&S.M[b.id].opened)||b.created)-((S.M[a.id]&&S.M[a.id].opened)||a.created));draw()}
 function hue(s){let h=0;for(const c of s)h=(h*31+c.codePointAt(0))%360;return h}
 function draw(){const q=$('#q').value.trim().toLowerCase(),G=$('#grid');G.innerHTML='';
- if(!S.bs.length){G.innerHTML='<div class="em">'+svg('book')+'<h2>المكتبة فارغة</h2><div>اضغط/ي «إضافة كتاب» لبدء القراءة.</div><div class="fm">PDF · EPUB · DOCX · HTML · MD · TXT · CBZ</div></div>';return}
+ if(!S.bs.length){G.innerHTML='<div class="em">'+svg('book')+'<h2>المكتبة فارغة</h2><div>اضغط/ي «إضافة كتاب» للبدء.</div><div class="fm">PDF · EPUB · DOCX · HTML · MD · TXT · CBZ</div></div>';return}
  const list=S.bs.filter(b=>b.name.toLowerCase().includes(q));
  if(!list.length){G.innerHTML='<div class="em"><div>لا توجد نتائج مطابقة.</div></div>';return}
  list.forEach((b,i)=>{const m=S.M[b.id]||{},n=(m.hl||[]).length,pc=m.total?Math.round(100*((m.last||0)+1)/m.total):0,h=hue(b.name);
   const c=document.createElement('div');c.className='bk';c.style.animationDelay=Math.min(i,10)*.04+'s';
   c.innerHTML='<button class="cv"><em class="tg"></em><span></span></button><button class="rm" aria-label="حذف الكتاب">'+svg('trash')+'</button><div class="bi"><div class="bar"><i></i></div><div class="bm"></div></div>';
-  const cv=c.querySelector('.cv');cv.style.background='linear-gradient(150deg,hsl('+h+' 52% 46%),hsl('+(h+34)+' 58% 26%))';
+  const cv=c.querySelector('.cv');cv.style.background='linear-gradient(150deg,hsl('+h+' 30% 40%),hsl('+(h+26)+' 34% 21%))';
   cv.querySelector('span').textContent=b.name;cv.querySelector('.tg').textContent=(b.type||'').toUpperCase();cv.dir='auto';cv.onclick=()=>openBook(b.id);
   c.querySelector('.bar i').style.width=pc+'%';
-  c.querySelector('.bm').textContent=(m.total?fmt(pc)+'٪ مقروء':'لم تبدأ/ي القراءة بعد')+(n?' · '+fmt(n)+(n===1?' تظليل':' تظليلات'):'');
+  c.querySelector('.bm').textContent=(m.total?fmt(pc)+'٪ مقروء':'القراءة لم تبدأ بعد')+(n?' · '+fmt(n)+(n===1?' تظليل':' تظليلات'):'');
   c.querySelector('.rm').onclick=async()=>{if(confirm('حذف «'+b.name+'» وجميع تظليلاته؟')){await del('books',b.id);await del('meta',b.id);lib()}};
   G.appendChild(c)})}
 $('#q').oninput=draw;
@@ -267,7 +277,7 @@ async function openBook(id){const b=await get('books',id);if(!b)return;S.b=b;S.m
   }}catch(err){toast('تعذّر فتح هذا الكتاب'+(err&&err.message?': '+err.message:''));closeBook();return}
  const last=Math.min(S.meta.last||0,S.pgs.length-1);if(last>0&&S.pgs[last])S.pgs[last].scrollIntoView();
  progress();count();persist();
- if(!LS.get('tip',0)){LS.set('tip',1);setTimeout(()=>toast('ظلّل/ي أي نص ليُحفظ تلقائيًا'),900)}}
+ }
 async function renderPdf(d){const w=d.clientWidth;if(!w||d.dataset.w==w)return;d.dataset.w=w;
  const page=await S.pdf.getPage(+d.dataset.i+1),v0=page.getViewport({scale:1}),sc=w/v0.width,dpr=Math.min(devicePixelRatio||1,2),v=page.getViewport({scale:sc*dpr}),c=d.querySelector('canvas');
  c.width=v.width;c.height=v.height;d.style.aspectRatio=v0.width+'/'+v0.height;
@@ -300,12 +310,12 @@ function partsOf(rg){const parts=[];
  return parts}
 function paintPage(d){const i=+d.dataset.i;
  if(S.b.type==='pdf'){const L=d.querySelector('.hlL');L.innerHTML='';
-  S.meta.hl.forEach(h=>h.parts.forEach(pt=>{if(pt.pg!==i||!pt.rects)return;pt.rects.forEach(r=>{const e=document.createElement('i');e.className='hr';e.dataset.h=h.id;e.style.cssText='left:'+r[0]*100+'%;top:'+r[1]*100+'%;width:'+r[2]*100+'%;height:'+r[3]*100+'%';L.appendChild(e)})}));return}
+  S.meta.hl.forEach(h=>h.parts.forEach(pt=>{if(pt.pg!==i||!pt.rects)return;const z=h.z||2;pt.rects.forEach(r=>{const e=document.createElement('i');e.className='hr';e.dataset.h=h.id;const y=z===1?r[1]+r[3]*.58:z===3?r[1]-r[3]*.18:r[1],t=z===1?r[3]*.42:z===3?r[3]*1.36:r[3];e.style.cssText='left:'+r[0]*100+'%;top:'+y*100+'%;width:'+r[2]*100+'%;height:'+t*100+'%';L.appendChild(e)})}));return}
  d.querySelectorAll('[data-t]').forEach(p=>{const t=p.dataset.t,pi=+p.dataset.pi,rs=[];
-  S.meta.hl.forEach(h=>h.parts.forEach(q=>{if(q.pg===i&&q.pi===pi)rs.push([q.s,q.e,h.id])}));
+  S.meta.hl.forEach(h=>h.parts.forEach(q=>{if(q.pg===i&&q.pi===pi)rs.push([q.s,q.e,h.id,h.z||2])}));
   if(!rs.length){if(p.childNodes.length!==1||p.firstChild.nodeType!==3)p.textContent=t;return}
   rs.sort((a,b)=>a[0]-b[0]);const m=[];rs.forEach(r=>{const l=m[m.length-1];if(l&&r[0]<=l[1])l[1]=Math.max(l[1],r[1]);else m.push(r.slice())});
-  p.textContent='';let pos=0;m.forEach(r=>{if(r[0]>pos)p.append(t.slice(pos,r[0]));const k=document.createElement('mark');k.dataset.h=r[2];k.textContent=t.slice(r[0],r[1]);p.append(k);pos=r[1]});if(pos<t.length)p.append(t.slice(pos))})}
+  p.textContent='';let pos=0;m.forEach(r=>{if(r[0]>pos)p.append(t.slice(pos,r[0]));const k=document.createElement('mark');k.dataset.h=r[2];k.dataset.z=r[3]||2;k.textContent=t.slice(r[0],r[1]);p.append(k);pos=r[1]});if(pos<t.length)p.append(t.slice(pos))})}
 const repaint=h=>{new Set(h.parts.map(p=>p.pg)).forEach(i=>S.pgs[i]&&paintPage(S.pgs[i]))};
 function count(){const n=S.meta.hl.length;$('#hc').hidden=!n;$('#hc').textContent=fmt(n)}
 function removeHl(id){const h=S.meta.hl.find(x=>x.id===id);if(!h)return;S.meta.hl=S.meta.hl.filter(x=>x!==h);repaint(h);count();persist();if(!$('#pn').hidden)drawPanel();
@@ -315,7 +325,7 @@ function onSel(){if(!S.b||$('#rd').hidden||!$('#pn').hidden)return;const sel=get
  const rg=sel.getRangeAt(0);if(!$('#pages').contains(rg.commonAncestorContainer))return;
  const text=sel.toString().replace(/\s+/g,' ').trim();if(text.length<2)return;
  const parts=partsOf(rg);if(!parts.length)return;
- const h={id:crypto.randomUUID(),text:text.slice(0,2000),ts:Date.now(),parts};S.meta.hl.push(h);sel.removeAllRanges();repaint(h);count();persist();
+ const h={id:crypto.randomUUID(),text:text.slice(0,2000),ts:Date.now(),z:Z,parts};S.meta.hl.push(h);sel.removeAllRanges();repaint(h);count();persist();
  toast('تم حفظ التظليل','تراجع',()=>{S.meta.hl=S.meta.hl.filter(x=>x!==h);repaint(h);count();persist()})}
 /* النقر على تظليل لإزالته */
 $('#pages').addEventListener('click',e=>{const sel=getSelection();if(sel&&!sel.isCollapsed)return;const pg=e.target.closest('.pg');if(!pg){hidePop();return}let id=null;
@@ -328,7 +338,7 @@ function hidePop(){$('#pop').hidden=true}
 /* لوحة التظليلات */
 const order=h=>{const q=h.parts[0];return q.pg*1e6+(q.rects?q.rects[0][1]*1e5:q.pi*1e3+q.s/1e3)};
 function drawPanel(){const L=$('#hl');L.innerHTML='';const hs=S.meta.hl.slice().sort((a,b)=>order(a)-order(b));
- if(!hs.length){L.innerHTML='<div class="em" style="padding:40px 10px">لا توجد تظليلات في هذا الكتاب بعد.<br>ظلّل/ي أي نص أثناء القراءة ليُحفظ هنا تلقائيًا.</div>';return}
+ if(!hs.length){L.innerHTML='<div class="em" style="padding:40px 10px">لا توجد تظليلات بعد.</div>';return}
  hs.forEach(h=>{const it=document.createElement('div');it.className='hi';it.innerHTML='<button class="go"><q dir="auto"></q><small></small></button><button class="ib" aria-label="حذف التظليل">'+svg('trash')+'</button>';
   it.querySelector('q').textContent=h.text;it.querySelector('small').textContent='صفحة '+fmt(h.parts[0].pg+1);
   it.querySelector('.go').onclick=()=>jump(h);it.querySelector('.ib').onclick=()=>removeHl(h.id);L.appendChild(it)})}
@@ -342,6 +352,10 @@ $('#hb').onclick=openPanel;$('#pnx').onclick=closePanel;$('#sc').onclick=closePa
 $('#cpall').onclick=()=>{const t=S.meta.hl.slice().sort((a,b)=>order(a)-order(b)).map(h=>'«'+h.text+'» — صفحة '+fmt(h.parts[0].pg+1)).join('\n\n');
  navigator.clipboard&&navigator.clipboard.writeText(t).then(()=>toast('تم نسخ التظليلات'),()=>toast('تعذّر النسخ'))};
 addEventListener('keydown',e=>{if(e.key==='Escape'){closePanel();hidePop()}});
+let Z=LS.get('hsz',2);const setZ=z=>{Z=z;LS.set('hsz',z);$('#sz').style.setProperty('--z',z);document.querySelectorAll('#szp button').forEach(b=>b.setAttribute('aria-pressed',String(+b.dataset.z===z)))};
+$('#sz').onclick=e=>{e.stopPropagation();$('#szp').hidden=!$('#szp').hidden};
+document.querySelectorAll('#szp button').forEach(b=>b.onclick=()=>{setZ(+b.dataset.z);$('#szp').hidden=true});
+document.addEventListener('click',e=>{if(!e.target.closest('#szp,#sz'))$('#szp').hidden=true});setZ(Z);
 if('serviceWorker'in navigator)navigator.serviceWorker.register('sw.js').catch(()=>{});
 lib();
 </script>
