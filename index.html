@@ -141,12 +141,90 @@ body:has(#lib:not([hidden])) #hero{display:block;animation:fu .7s both}
 #rd:not([hidden]){animation:fi .5s both}
 @media (prefers-reduced-motion:reduce){#wel *,.card,#hero{animation:none!important}#wel,.cover{transition:none}}
 </style>
+<style>
+/* ركن المذاكرة */
+#std{--ac:#3FD1B0}
+.sdw{max-width:1180px;margin:0 auto;padding:30px 20px 40px;animation:fu .6s both}
+.sdh{display:flex;align-items:flex-end;justify-content:space-between;gap:12px;flex-wrap:wrap;margin-bottom:20px}
+.sdh .hk{color:var(--ac);font-size:14px;font-weight:700}
+.sdh h2{margin:4px 0 0;font-size:36px;font-family:'Amiri','Traditional Arabic',serif}
+.sdg{display:grid;grid-template-columns:290px minmax(0,1fr);gap:20px;align-items:start}
+.sdl{display:flex;flex-direction:column;gap:12px;background:#ffffff0a;border:1px solid #2C3C52;border-radius:24px;padding:14px}
+.sdadd{justify-content:center;background:var(--ac)!important;border-color:var(--ac)!important;color:#08332A!important}
+.sdi{all:unset;box-sizing:border-box;display:flex;flex-direction:column;gap:4px;padding:12px 14px;border-radius:16px;cursor:pointer;border:1px solid transparent;color:var(--ink)}
+.sdi:hover{background:#ffffff0d}.sdi.on{background:#3FD1B022;border-color:var(--ac)}
+.sdi b{font-size:16px}.sdi span{font-size:13px;color:var(--mute);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.sdemp,.sdwel{color:var(--mute);line-height:2;text-align:center;padding:30px 12px}
+.sdm{background:#ffffff0a;border:1px solid #2C3C52;border-radius:28px;padding:18px;min-height:360px}
+.sdt{width:100%;background:transparent;border:0;border-bottom:1px solid #2C3C52;color:var(--ink);font-size:22px;font-family:'Amiri','Traditional Arabic',serif;padding:6px 2px 10px;outline:0;margin-bottom:14px}
+.sdp{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+.sdc h3{margin:0 0 8px;font-size:14px;color:var(--ac)}
+.sdc textarea{width:100%;height:340px;resize:vertical;border-radius:18px;border:1px solid #2C3C52;padding:14px;font-size:16px;line-height:2;background:#0d141e;color:var(--ink);outline:0}
+.sdc.paper textarea{background:#FFFDF7;color:#1F2430;border-color:#D9CDB6;line-height:36px;padding-top:6px;background-image:repeating-linear-gradient(transparent 0 35px,#E6DDC9 35px 36px);background-attachment:local;font-family:'Amiri','Traditional Arabic',serif;font-size:19px}
+.sdb,.sdq{display:flex;flex-wrap:wrap;gap:8px;margin-top:12px}
+.sdb .b{display:inline-flex;align-items:center;gap:8px;border-radius:16px}
+.sdb .ai{background:linear-gradient(135deg,#3FD1B0,#4B8DF8);border-color:transparent;color:#06222E;font-weight:700}
+.sdq .qi{flex:1 1 220px;min-height:44px;border-radius:999px;border:1px solid #2C3C52;background:#0d141e;color:var(--ink);padding:0 18px;font-size:15px;outline:0}
+.sda .ac{margin-top:12px;padding:14px 16px;border-radius:18px;background:#3FD1B014;border:1px solid #3FD1B055;line-height:1.9;white-space:pre-wrap}
+.sda .ac .b{margin-top:10px;min-height:38px;font-size:13px}
+@media(max-width:760px){.sdg,.sdp{grid-template-columns:1fr}}
+/* الملف الشخصي والمنبهات */
+#pfb{padding:0;width:44px;border-radius:50%;background:linear-gradient(135deg,#F5B544,#E4577A);border:0;color:#fff;font-weight:700;font-size:17px}
+#pfbd{position:fixed;inset:0;z-index:39;background:#0009;backdrop-filter:blur(3px)}
+#prof{position:fixed;inset:0 auto 0 0;z-index:40;width:min(430px,100vw);overflow-y:auto;overscroll-behavior:contain;background:linear-gradient(180deg,#1E1A33,#14111F);box-shadow:20px 0 60px #000a;border-radius:0 28px 28px 0}
+#prof:not([hidden]){animation:ps .38s cubic-bezier(.2,.8,.2,1) both}
+@keyframes ps{from{transform:translateX(-100%)}to{transform:none}}
+.pft{display:flex;align-items:center;gap:14px;padding:calc(22px + env(safe-area-inset-top,0px)) 20px 22px;background:linear-gradient(135deg,#F5B544 0%,#E4577A 55%,#7A4DD8 100%);color:#fff;border-radius:0 0 30px 0}
+.pfa{flex:none;width:64px;height:64px;border-radius:50%;display:grid;place-items:center;font-size:28px;font-weight:700;background:#ffffff33;border:2px solid #fff8;font-family:'Amiri',serif}
+.pfnm{flex:1;min-width:0;display:flex;flex-direction:column;gap:2px}
+.pfnm input{background:transparent;border:0;border-bottom:1px dashed #fff9;color:#fff;font-size:22px;font-weight:700;padding:2px 0;outline:0;width:100%}
+.pfnm input::placeholder{color:#fffb}.pfnm small{opacity:.85}
+.pfx{flex:none;width:44px;height:44px;border-radius:50%;border:0;background:#0003;color:#fff;cursor:pointer;display:grid;place-items:center}
+.pfs{padding:22px 20px 6px}
+.pfs h3{margin:0 0 4px;font-size:19px;display:flex;align-items:center;gap:8px}.pfs h3 .ic{color:#F5B544}
+.pfs>p{margin:0 0 14px;color:var(--mute);font-size:14px;line-height:1.8}
+.pfs>input{width:100%;min-height:46px;border-radius:14px;border:1px solid #3A3560;background:#0d0b16;color:var(--ink);padding:0 14px;margin-bottom:10px;outline:0}
+.rc{position:relative;margin-bottom:14px;padding:16px;border-radius:22px;background:linear-gradient(145deg,#2A2347,#1D1832);border:1px solid #3A3560;transition:opacity .3s}
+.rc::before,.rc::after{content:"";position:absolute;top:50%;width:18px;height:18px;border-radius:50%;background:#14111F;transform:translateY(-50%)}
+.rc::before{right:-9px}.rc::after{left:-9px}
+.rc.off{opacity:.5}
+.rt{display:flex;align-items:center;justify-content:space-between;gap:10px}
+.rt input[type=time]{background:transparent;border:0;color:#fff;font-size:40px;font-weight:700;font-family:inherit;color-scheme:dark;outline:0;padding:0;width:170px}
+.rlb{width:100%;margin:8px 0 12px;background:transparent;border:0;border-bottom:1px dashed #4A4585;color:var(--ink);font-size:15px;padding:6px 0;outline:0}
+.rd{display:flex;gap:6px;justify-content:space-between;margin-bottom:12px}
+.dy{flex:1;min-width:0;height:40px;border-radius:50%;border:1px solid #4A4585;background:transparent;color:var(--mute);cursor:pointer;font-size:14px;transition:all .2s}
+.dy.on{background:linear-gradient(135deg,#F5B544,#E4577A);border-color:transparent;color:#fff;font-weight:700}
+.rdel{min-height:36px!important;font-size:13px!important;border-radius:12px!important}
+.sw2{position:relative;display:block;width:54px;height:32px;flex:none}
+.sw2 input{position:absolute;inset:0;opacity:0;margin:0;cursor:pointer;z-index:2}
+.sw2 i{position:absolute;inset:0;border-radius:999px;background:#4A4585;transition:.25s}
+.sw2 i::after{content:"";position:absolute;top:4px;right:4px;width:24px;height:24px;border-radius:50%;background:#fff;transition:.25s}
+.sw2 input:checked+i{background:linear-gradient(135deg,#F5B544,#E4577A)}
+.sw2 input:checked+i::after{transform:translateX(-22px)}
+.rem0{padding:20px;text-align:center;color:var(--mute);border:1.5px dashed #3A3560;border-radius:20px;margin-bottom:14px}
+#radd{width:100%;border-radius:18px;margin-bottom:10px}
+.rn{font-size:13px;color:var(--mute);line-height:1.9;padding-bottom:10px}
+.rn .b{min-height:38px;font-size:13px;margin-bottom:6px}
+</style>
 </head>
 <body data-tool="none">
 <div id="wel" role="dialog" aria-label="مرحباً"><i class="o1"></i><i class="o2"></i><div class="wc"><div class="wl"><svg width="96" height="96" viewBox="0 0 64 64" aria-hidden="true"><defs><linearGradient id="lg2" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#4348B8"/><stop offset="1" stop-color="#12143A"/></linearGradient></defs><rect width="64" height="64" rx="16" fill="url(#lg2)"/><path d="M32 20C26 16 18 16 12 18V44C18 42 26 42 32 46Z" fill="#F4F1FF"/><path d="M32 20C38 16 46 16 52 18V44C46 42 38 42 32 46Z" fill="#D7D2F4"/><path d="M38 13H46V30L42 26L38 30Z" fill="#F5B544"/><circle cx="19" cy="11" r="2.2" fill="#F5B544"/></svg></div><h1>مكتبتي</h1><p>اقري، ظلّلي، اكتبي ملاحظاتك واقتباساتك.<br>كل كتبك وأفكارك في مكان واحد هادي.</p><button id="welgo" class="b pri">ابدأي القراءة<svg class="ic" viewBox="0 0 24 24" aria-hidden="true"><path d="M15 6l-6 6 6 6"/></svg></button></div></div>
-<header><div class="brand"><svg width="42" height="42" viewBox="0 0 64 64" aria-hidden="true"><defs><linearGradient id="lg" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#4348B8"/><stop offset="1" stop-color="#12143A"/></linearGradient></defs><rect width="64" height="64" rx="16" fill="url(#lg)"/><path d="M32 20C26 16 18 16 12 18V44C18 42 26 42 32 46Z" fill="#F4F1FF"/><path d="M32 20C38 16 46 16 52 18V44C46 42 38 42 32 46Z" fill="#D7D2F4"/><path d="M38 13H46V30L42 26L38 30Z" fill="#F5B544"/><circle cx="19" cy="11" r="2.2" fill="#F5B544"/></svg><h1 id="ttl">مكتبتي</h1></div><div class="row" style="margin:0"><button class="b" id="inst" hidden>تثبيت التطبيق</button><label class="b pri">إضافة كتاب (PDF أو نص)<input id="add" type="file" accept=".pdf,.txt,.md,application/pdf,text/plain" multiple></label></div></header>
+<header><div class="brand"><svg width="42" height="42" viewBox="0 0 64 64" aria-hidden="true"><defs><linearGradient id="lg" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#4348B8"/><stop offset="1" stop-color="#12143A"/></linearGradient></defs><rect width="64" height="64" rx="16" fill="url(#lg)"/><path d="M32 20C26 16 18 16 12 18V44C18 42 26 42 32 46Z" fill="#F4F1FF"/><path d="M32 20C38 16 46 16 52 18V44C46 42 38 42 32 46Z" fill="#D7D2F4"/><path d="M38 13H46V30L42 26L38 30Z" fill="#F5B544"/><circle cx="19" cy="11" r="2.2" fill="#F5B544"/></svg><h1 id="ttl">مكتبتي</h1></div><div class="row" style="margin:0"><button class="b" id="stb"><svg class="ic" viewBox="0 0 24 24" aria-hidden="true"><path d="M4 5h7a3 3 0 013 3v11a2 2 0 00-2-2H4zM20 5h-3a3 3 0 00-3 3v11a2 2 0 012-2h4z"/></svg><span>المذاكرة</span></button><button class="b" id="pfb" aria-label="الملف الشخصي والمنبهات"><span id="pfi">؟</span></button><button class="b" id="inst" hidden>تثبيت التطبيق</button><label class="b pri">إضافة كتاب (PDF أو نص)<input id="add" type="file" accept=".pdf,.txt,.md,application/pdf,text/plain" multiple></label></div></header>
 <p id="msg" hidden></p>
 <section id="hero"><div class="hk">مكتبتك الشخصية</div><h2>كتبك، بهدوء.</h2><p>اختاري كتاب وكملي من حيث وقفتي، أو أضيفي كتاب جديد.</p></section>
+<section id="std" hidden>
+<div class="sdw">
+<div class="sdh"><div><div class="hk">ركن المذاكرة</div><h2>لخّصي وذاكري</h2></div><button class="b" id="sdx">رجوع للمكتبة</button></div>
+<div class="sdg">
+<aside class="sdl"><label class="b pri sdadd">+ ملف جديد (PDF أو نص)<input id="sdf" type="file" accept=".pdf,.txt,.md,application/pdf,text/plain"></label><div id="sdl2"></div></aside>
+<div class="sdm" id="sdm"></div>
+</div></div></section>
+<div id="pfbd" hidden></div>
+<aside id="prof" hidden aria-label="الملف الشخصي والمنبهات">
+<div class="pft"><div class="pfa" id="pfa">؟</div><div class="pfnm"><input id="pfn" placeholder="اكتبي اسمك" aria-label="اسمك"><small>إعداداتك ومنبهات قراءتك</small></div><button class="pfx" id="pfx" aria-label="إغلاق"><svg class="ic" viewBox="0 0 24 24" aria-hidden="true"><path d="M6 6l12 12M18 6L6 18"/></svg></button></div>
+<div class="pfs"><h3><svg class="ic" viewBox="0 0 24 24" aria-hidden="true"><path d="M6 17V11a6 6 0 0112 0v6l2 2H4z"/><path d="M10 21h4"/></svg>منبهات القراءة</h3><p>اختاري الوقت والأيام اللي تحبي نفكرك فيها.</p><div id="rl"></div><button class="b pri" id="radd">+ منبه جديد</button><div class="rn" id="rnote"></div></div>
+<div class="pfs"><h3><svg class="ic" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3l1.8 5.2L19 10l-5.2 1.8L12 17l-1.8-5.2L5 10l5.2-1.8z"/></svg>مساعد Claude</h3><p>الصقي رابط المساعد عشان التلخيص والأسئلة يشتغلوا.</p><input id="aiu" dir="ltr" placeholder="https://اسم-الخدمة.workers.dev"><button class="b" id="aisv">حفظ الرابط</button></div>
+</aside>
 <main id="lib"></main>
 <main id="rd" hidden><div id="pages"></div><div id="txv" hidden></div></main>
 <section id="panel" hidden></section>
@@ -157,7 +235,7 @@ body:has(#lib:not([hidden])) #hero{display:block;animation:fu .7s both}
 <script>
 const CDN='https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/';
 const $=s=>document.querySelector(s);
-const IC={"read": "<path d=\"M5 3l14 8-6 2-2 6z\"/>", "pen": "<path d=\"M4 20l1-4L16 5l3 3L8 19z\"/><path d=\"M14 7l3 3\"/>", "hl": "<path d=\"M14 4l6 6-8 8-6-6z\"/><path d=\"M4 21h8\"/>", "quote": "<path d=\"M7 17h3l1-5V7H5v5h3\"/><path d=\"M16 17h3l1-5V7h-6v5h3\"/>", "note": "<path d=\"M5 4h14v11l-5 5H5z\"/><path d=\"M14 20v-5h5\"/>", "arrow": "<path d=\"M5 12h14\"/><path d=\"M13 6l6 6-6 6\"/>", "circle": "<circle cx=\"12\" cy=\"12\" r=\"8\"/>", "rect": "<rect x=\"4\" y=\"5\" width=\"16\" height=\"14\" rx=\"3\"/>", "move": "<path d=\"M12 3v18M3 12h18M9 6l3-3 3 3M9 18l3 3 3-3M6 9l-3 3 3 3M18 9l3 3-3 3\"/>", "erase": "<path d=\"M20 20H9l-5-5 10-10 6 6z\"/><path d=\"M7 12l6 6\"/>", "books": "<path d=\"M5 4h4v16H5zM11 4h4v16h-4z\"/><path d=\"M17.5 6l3 .8-3.5 13.2-3-.8z\"/>", "prev": "<path d=\"M9 6l6 6-6 6\"/>", "next": "<path d=\"M15 6l-6 6 6 6\"/>", "tools": "<path d=\"M4 8h9M17 8h3M4 16h3M11 16h9\"/><circle cx=\"15\" cy=\"8\" r=\"2\"/><circle cx=\"9\" cy=\"16\" r=\"2\"/>", "mark": "<path d=\"M7 4h10v16l-5-4-5 4z\"/>", "nb": "<path d=\"M6 3h12v18H6z\"/><path d=\"M10 3v18M13 8h3\"/>"};IC.text='<path d="M4 7V5h16v2M12 5v14M9 19h6"/>';
+const IC={"read": "<path d=\"M5 3l14 8-6 2-2 6z\"/>", "pen": "<path d=\"M4 20l1-4L16 5l3 3L8 19z\"/><path d=\"M14 7l3 3\"/>", "hl": "<path d=\"M14 4l6 6-8 8-6-6z\"/><path d=\"M4 21h8\"/>", "quote": "<path d=\"M7 17h3l1-5V7H5v5h3\"/><path d=\"M16 17h3l1-5V7h-6v5h3\"/>", "note": "<path d=\"M5 4h14v11l-5 5H5z\"/><path d=\"M14 20v-5h5\"/>", "arrow": "<path d=\"M5 12h14\"/><path d=\"M13 6l6 6-6 6\"/>", "circle": "<circle cx=\"12\" cy=\"12\" r=\"8\"/>", "rect": "<rect x=\"4\" y=\"5\" width=\"16\" height=\"14\" rx=\"3\"/>", "move": "<path d=\"M12 3v18M3 12h18M9 6l3-3 3 3M9 18l3 3 3-3M6 9l-3 3 3 3M18 9l3 3-3 3\"/>", "erase": "<path d=\"M20 20H9l-5-5 10-10 6 6z\"/><path d=\"M7 12l6 6\"/>", "books": "<path d=\"M5 4h4v16H5zM11 4h4v16h-4z\"/><path d=\"M17.5 6l3 .8-3.5 13.2-3-.8z\"/>", "prev": "<path d=\"M9 6l6 6-6 6\"/>", "next": "<path d=\"M15 6l-6 6 6 6\"/>", "tools": "<path d=\"M4 8h9M17 8h3M4 16h3M11 16h9\"/><circle cx=\"15\" cy=\"8\" r=\"2\"/><circle cx=\"9\" cy=\"16\" r=\"2\"/>", "mark": "<path d=\"M7 4h10v16l-5-4-5 4z\"/>", "nb": "<path d=\"M6 3h12v18H6z\"/><path d=\"M10 3v18M13 8h3\"/>"};IC.text='<path d="M4 7V5h16v2M12 5v14M9 19h6"/>';IC.study='<path d="M4 5h7a3 3 0 013 3v11a2 2 0 00-2-2H4zM20 5h-3a3 3 0 00-3 3v11a2 2 0 012-2h4z"/>';IC.bell='<path d="M6 17V11a6 6 0 0112 0v6l2 2H4z"/><path d="M10 21h4"/>';IC.spark='<path d="M12 3l1.8 5.2L19 10l-5.2 1.8L12 17l-1.8-5.2L5 10l5.2-1.8z"/><path d="M19 16l.8 2.2L22 19l-2.2.8L19 22l-.8-2.2L16 19l2.2-.8z"/>';
 const ic=n=>'<svg class="ic" viewBox="0 0 24 24" aria-hidden="true">'+IC[n]+'</svg>';
 const S={tool:'none',color:'#FFE680',qc:'#FFE680',tab:'tools',cur:0,io:null,sel:null};
 const dbp=new Promise((ok,no)=>{const r=indexedDB.open('reader',1);r.onupgradeneeded=()=>{r.result.createObjectStore('books',{keyPath:'id'});r.result.createObjectStore('meta',{keyPath:'id'})};r.onsuccess=()=>ok(r.result);r.onerror=()=>no(r.error)});
@@ -378,6 +456,81 @@ $('#tmb').onclick=()=>setTM(!S.tm);$('#home').addEventListener('click',()=>setTM
 (function(){const w=$('#wel');let seen=false;try{seen=sessionStorage.getItem('wel')}catch(_){}
 if(seen){w.remove();return}
 $('#welgo').onclick=()=>{w.classList.add('out');try{sessionStorage.setItem('wel','1')}catch(_){}setTimeout(()=>w.remove(),750)}})();
+const LS={get(k,d){try{const v=JSON.parse(localStorage.getItem(k));return v==null?d:v}catch(_){return d}},set(k,v){try{localStorage.setItem(k,JSON.stringify(v))}catch(_){}}};
+const esc=t=>t;
+/* ===== ركن المذاكرة ===== */
+const ST={items:[],cur:null};let stT;
+const stSave=()=>{clearTimeout(stT);stT=setTimeout(()=>put('meta',{id:'study',items:ST.items}),300)};
+async function extractPdf(f){await pdfLib();const pdf=await pdfjsLib.getDocument({data:await f.arrayBuffer(),disableFontFace:true}).promise;const out=[];
+ for(let i=1;i<=pdf.numPages;i++){const c=await(await pdf.getPage(i)).getTextContent(),rows=[];
+  c.items.forEach(it=>{if(typeof it.str!=='string')return;const y=Math.round(it.transform[5]);let r=rows.find(r=>Math.abs(r.y-y)<=3);if(!r){r={y,a:[]};rows.push(r)}r.a.push([it.transform[4],it.str])});
+  rows.sort((a,b)=>b.y-a.y);out.push(rows.map(r=>r.a.sort((a,b)=>b[0]-a[0]).map(q=>q[1]).join('').replace(/ {2,}/g,' ').trim()).filter(Boolean).join('\n'))}
+ return out.join('\n\n')}
+function quick(t,n=6){const ss=t.replace(/\s+/g,' ').split(/(?<=[.؟!؛?])\s+/).filter(s=>s.length>30);if(ss.length<=n)return ss.map(x=>'• '+x).join('\n');
+ const W=/[\u0600-\u06FFa-z]{4,}/gi,f={};(t.toLowerCase().match(W)||[]).forEach(w=>f[w]=(f[w]||0)+1);
+ return ss.map((s,i)=>({i,s,v:((s.match(W)||[]).reduce((a,w)=>a+(f[w.toLowerCase()]||0),0))/Math.sqrt(s.length)})).sort((a,b)=>b.v-a.v).slice(0,n).sort((a,b)=>a.i-b.i).map(x=>'• '+x.s).join('\n')}
+async function askAI(mode,text,q){const u=LS.get('ai_url','');if(!u)throw new Error('no_url');
+ const r=await fetch(u,{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({mode,text:text.slice(0,60000),question:q||''})});
+ if(!r.ok)throw new Error('http '+r.status);const j=await r.json();if(!j.answer)throw new Error('empty');return j.answer}
+function stList(){const L=$('#sdl2');L.innerHTML='';if(!ST.items.length){L.innerHTML='<p class="sdemp">لسه مفيش ملفات.<br>ضيفي PDF أو ملف نص وابدئي التلخيص.</p>';return}
+ ST.items.forEach(it=>{const d=document.createElement('button');d.className='sdi'+(ST.cur===it.id?' on':'');d.innerHTML='<b></b><span></span>';d.firstChild.textContent=it.title;d.lastChild.textContent=(it.summary||'من غير ملخص لسه').slice(0,70);d.onclick=()=>{ST.cur=it.id;stList();stWork()};L.appendChild(d)})}
+function stWork(){const W=$('#sdm'),it=ST.items.find(x=>x.id===ST.cur);
+ if(!it){W.innerHTML='<div class="sdwel">اختاري ملف من القايمة أو ضيفي واحد جديد، وهنا تلخّصي وتسألي المساعد.</div>';return}
+ W.innerHTML='<input class="sdt" aria-label="العنوان"><div class="sdp"><div class="sdc"><h3>المصدر</h3><textarea class="src" readonly aria-label="النص"></textarea></div><div class="sdc paper"><h3>ملخصي</h3><textarea class="sum" aria-label="الملخص" placeholder="اكتبي ملخصك هنا أو خلي المساعد يبدأ لك"></textarea></div></div><div class="sdb"><button class="b ai">'+ic('spark')+'لخّصي بـ Claude</button><button class="b quick">تلخيص سريع (من غير نت)</button><button class="b cp">نسخ</button><button class="b dl">تحميل</button><button class="b red del">حذف</button></div><div class="sdq"><input class="qi" placeholder="اسألي عن النص ده..." aria-label="سؤال"><button class="b ask">اسألي</button></div><div class="sda"></div>';
+ const q=x=>W.querySelector(x),sum=q('.sum'),ti=q('.sdt'),A=q('.sda');
+ ti.value=it.title;q('.src').value=it.text;sum.value=it.summary||'';
+ ti.oninput=()=>{it.title=ti.value;stSave()};sum.oninput=()=>{it.summary=sum.value;stSave()};
+ const add=t=>{sum.value=(sum.value?sum.value+'\n\n':'')+t;it.summary=sum.value;stSave();stList()};
+ const noUrl=()=>{A.innerHTML='<div class="ac">المساعد لسه مش متوصل. افتحي الملف الشخصي (الدايرة فوق) وحطي رابط المساعد.</div>'};
+ const run=async(mode,qq,bt)=>{const o=bt.innerHTML;bt.disabled=true;bt.textContent='بيفكر...';
+  try{const a=await askAI(mode,it.text,qq);if(mode==='summary')add(a);else{A.innerHTML='<div class="ac"></div><button class="b" type="button">أضيفي للملخص</button>';A.firstChild.textContent=a;A.lastChild.onclick=()=>add(a)}}
+  catch(e){if(e.message==='no_url')noUrl();else A.innerHTML='<div class="ac">مقدرتش أوصل للمساعد ('+e.message+'). اتأكدي من الرابط ومن النت.</div>'}
+  bt.disabled=false;bt.innerHTML=o};
+ q('.ai').onclick=e=>run('summary','',e.currentTarget);
+ q('.ask').onclick=e=>{const v=q('.qi').value.trim();if(v)run('ask',v,e.currentTarget)};
+ q('.quick').onclick=()=>add(quick(it.text));
+ q('.cp').onclick=e=>{navigator.clipboard&&navigator.clipboard.writeText(sum.value).then(()=>{e.target.textContent='تم النسخ ✓'})};
+ q('.dl').onclick=()=>{const a=document.createElement('a');a.href=URL.createObjectURL(new Blob([it.title+'\n\n'+sum.value],{type:'text/plain;charset=utf-8'}));a.download=(it.title||'ملخص')+'.txt';a.click()};
+ q('.del').onclick=()=>{if(confirm('حذف «'+it.title+'»؟')){ST.items=ST.items.filter(x=>x!==it);ST.cur=null;stSave();stList();stWork()}}}
+async function openStudy(){const m=await get('meta','study');ST.items=(m&&m.items)||[];
+ ['#lib','#rd','#bar','#panel','#sheet'].forEach(x=>$(x).hidden=true);if(window.setTM)setTM(false);$('#std').hidden=false;stList();stWork();scrollTo(0,0)}
+function closeStudy(){$('#std').hidden=true;$('#lib').hidden=false;$('#ttl').textContent='مكتبتي';lib()}
+$('#stb').onclick=openStudy;$('#sdx').onclick=closeStudy;
+$('#sdf').onchange=async e=>{const f=e.target.files[0];e.target.value='';if(!f)return;msg('جاري قراءة الملف...');
+ try{const pdf=/\.pdf$/i.test(f.name)||f.type==='application/pdf';let t=pdf?await extractPdf(f):await readTxt(f);t=t.trim().slice(0,300000);
+  if(t.length<40){msg('الملف ده شكله صور من غير نص. جربي كتاب PDF فيه نص.');setTimeout(()=>msg(''),3000);return}
+  const it={id:crypto.randomUUID(),title:f.name.replace(/\.[^.]+$/,''),created:Date.now(),text:t,summary:''};ST.items.unshift(it);ST.cur=it.id;stSave();stList();stWork();msg('')}
+ catch(err){msg('مقدرتش أقرأ الملف: '+err.message)}};
+/* ===== الملف الشخصي والمنبهات ===== */
+const DAYS=[[6,'س'],[0,'ح'],[1,'ن'],[2,'ث'],[3,'ر'],[4,'خ'],[5,'ج']];
+let R=LS.get('rems',[]);const saveR=()=>LS.set('rems',R);
+const paintName=()=>{const n=LS.get('pname','');const c=n?n.trim().charAt(0):'؟';$('#pfi').textContent=c;$('#pfa').textContent=c;$('#pfn').value=n};
+function rRender(){const L=$('#rl');L.innerHTML='';if(!R.length)L.innerHTML='<div class="rem0">مفيش منبهات لسه.<br>دوسي «منبه جديد».</div>';
+ R.forEach(r=>{const c=document.createElement('div');c.className='rc'+(r.on?'':' off');
+  c.innerHTML='<div class="rt"><input type="time" aria-label="الوقت"><label class="sw2"><input type="checkbox" aria-label="تشغيل المنبه"><i></i></label></div><input class="rlb" placeholder="اسم المنبه (مثلاً: ورد القراءة)" aria-label="اسم المنبه"><div class="rd"></div><button class="b red rdel" type="button">حذف المنبه</button>';
+  const tm=c.querySelector('input[type=time]'),ck=c.querySelector('input[type=checkbox]'),lb=c.querySelector('.rlb'),dv=c.querySelector('.rd');
+  tm.value=r.time;ck.checked=r.on;lb.value=r.label||'';
+  DAYS.forEach(([n,l])=>{const b=document.createElement('button');b.type='button';b.className='dy'+(r.days.includes(n)?' on':'');b.textContent=l;b.setAttribute('aria-pressed',String(r.days.includes(n)));b.onclick=()=>{r.days=r.days.includes(n)?r.days.filter(x=>x!==n):[...r.days,n];saveR();rRender()};dv.appendChild(b)});
+  tm.onchange=()=>{r.time=tm.value||r.time;r.last='';saveR()};ck.onchange=()=>{r.on=ck.checked;saveR();c.classList.toggle('off',!r.on)};lb.oninput=()=>{r.label=lb.value;saveR()};
+  c.querySelector('.rdel').onclick=()=>{R=R.filter(x=>x!==r);saveR();rRender()};L.appendChild(c)})}
+function noteRow(){const n=$('#rnote');if(!('Notification'in window)){n.textContent='المتصفح ده مش بيدعم الإشعارات.';return}
+ const p=Notification.permission;
+ if(p==='granted')n.textContent='الإشعارات شغالة. المنبه بيرن لما يكون التطبيق مفتوح أو شغال في الخلفية.';
+ else{n.innerHTML='<button class="b" type="button">فعّلي الإشعارات</button><br>من غير تفعيلها هيظهر لك التنبيه جوه التطبيق بس.';n.firstChild.onclick=async()=>{try{await Notification.requestPermission()}catch(_){}noteRow()}}}
+function fire(r){const t=r.label||'وقت القراءة',b='وقت قراءتك. افتحي كتابك وكملي من حيث وقفتي.';
+ if('Notification'in window&&Notification.permission==='granted'){const alt=()=>{try{new Notification(t,{body:b,icon:'icon-192.png',lang:'ar',dir:'rtl'})}catch(_){}};
+  if(navigator.serviceWorker&&navigator.serviceWorker.ready)navigator.serviceWorker.ready.then(g=>g.showNotification(t,{body:b,icon:'icon-192.png',badge:'icon-192.png',tag:'rem'+r.id,lang:'ar',dir:'rtl'})).catch(alt);else alt()}
+ msg(t+' — '+b);setTimeout(()=>msg(''),8000)}
+function remTick(){const n=new Date(),hm=('0'+n.getHours()).slice(-2)+':'+('0'+n.getMinutes()).slice(-2),key=n.toDateString()+hm;
+ R.forEach(r=>{if(r.on&&r.time===hm&&r.days.includes(n.getDay())&&r.last!==key){r.last=key;saveR();fire(r)}})}
+setInterval(remTick,20000);
+const openProf=()=>{paintName();rRender();noteRow();$('#aiu').value=LS.get('ai_url','');$('#pfbd').hidden=false;$('#prof').hidden=false};
+const closeProf=()=>{$('#pfbd').hidden=true;$('#prof').hidden=true};
+$('#pfb').onclick=openProf;$('#pfx').onclick=closeProf;$('#pfbd').onclick=closeProf;
+$('#pfn').oninput=()=>{LS.set('pname',$('#pfn').value);const c=$('#pfn').value.trim().charAt(0)||'؟';$('#pfi').textContent=c;$('#pfa').textContent=c};
+$('#radd').onclick=()=>{R.push({id:Date.now(),time:'20:00',label:'',days:[0,1,2,3,4,5,6],on:true,last:''});saveR();rRender()};
+$('#aisv').onclick=e=>{LS.set('ai_url',$('#aiu').value.trim());e.target.textContent='تم الحفظ ✓';setTimeout(()=>{e.target.textContent='حفظ الرابط'},1500)};
+paintName();
 if('serviceWorker'in navigator)navigator.serviceWorker.register('sw.js').catch(()=>{});
 lib();
 </script>
