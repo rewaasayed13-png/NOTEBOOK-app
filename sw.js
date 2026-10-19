@@ -1,4 +1,4 @@
-const C='reader-v13',CDN='https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/';
+const C='reader-v15',CDN='https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/';
 const SHELL=['./','index.html','manifest.webmanifest','icon-192.png','icon-512.png','logo.svg'];
 self.addEventListener('install',e=>{e.waitUntil(caches.open(C).then(async c=>{await c.addAll(SHELL);for(const u of ['lib/pdf.min.js','lib/pdf.worker.min.js',CDN+'pdf.min.js',CDN+'pdf.worker.min.js'])try{await c.add(u)}catch(_){}}));self.skipWaiting()});
 self.addEventListener('activate',e=>{e.waitUntil(caches.keys().then(k=>Promise.all(k.filter(n=>n!==C).map(n=>caches.delete(n)))).then(()=>self.clients.claim()))});
