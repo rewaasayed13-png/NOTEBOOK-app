@@ -106,21 +106,23 @@ body{padding-bottom:calc(40px + env(safe-area-inset-bottom,0px))}
 #bar .b.on .ic{color:#1B1740}
 #tg{touch-action:none}
 </style>
+<style>.tp .tx b{display:block;color:#6B6055;font-size:14px;margin-bottom:10px}.tp .body{white-space:pre-wrap;font-family:'Amiri','Traditional Arabic','Segoe UI',Tahoma,serif;font-size:21px;line-height:2.1}.tp .row{margin:16px 0 0}.tp .b{color:#1F2430;border-color:#C9BCA2;font-size:13px;min-height:40px}</style>
 </head>
 <body data-tool="none">
 <header><div class="brand"><svg width="42" height="42" viewBox="0 0 64 64" aria-hidden="true"><defs><linearGradient id="lg" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#4348B8"/><stop offset="1" stop-color="#12143A"/></linearGradient></defs><rect width="64" height="64" rx="16" fill="url(#lg)"/><path d="M32 20C26 16 18 16 12 18V44C18 42 26 42 32 46Z" fill="#F4F1FF"/><path d="M32 20C38 16 46 16 52 18V44C46 42 38 42 32 46Z" fill="#D7D2F4"/><path d="M38 13H46V30L42 26L38 30Z" fill="#F5B544"/><circle cx="19" cy="11" r="2.2" fill="#F5B544"/></svg><h1 id="ttl">مكتبتي</h1></div><div class="row" style="margin:0"><button class="b" id="inst" hidden>تثبيت التطبيق</button><label class="b pri">إضافة كتاب (PDF أو نص)<input id="add" type="file" accept=".pdf,.txt,.md,application/pdf,text/plain" multiple></label></div></header>
 <p id="msg" hidden></p>
 <main id="lib"></main>
-<main id="rd" hidden><div id="pages"></div></main>
+<main id="rd" hidden><div id="pages"></div><div id="txv" hidden></div></main>
 <section id="panel" hidden></section>
 <section id="sheet" hidden></section>
 <nav id="bar" hidden>
-<button class="b" id="home"><svg class="ic" viewBox="0 0 24 24" aria-hidden="true"><path d="M5 4h4v16H5zM11 4h4v16h-4z"/><path d="M17.5 6l3 .8-3.5 13.2-3-.8z"/></svg><span>الكتب</span></button><button class="b" id="pv"><svg class="ic" viewBox="0 0 24 24" aria-hidden="true"><path d="M9 6l6 6-6 6"/></svg><span>السابقة</span></button><span id="lbl"></span><button class="b" id="nx"><svg class="ic" viewBox="0 0 24 24" aria-hidden="true"><path d="M15 6l-6 6 6 6"/></svg><span>التالية</span></button><button class="b" id="pen"><svg class="ic" viewBox="0 0 24 24" aria-hidden="true"><path d="M4 8h9M17 8h3M4 16h3M11 16h9"/><circle cx="15" cy="8" r="2"/><circle cx="9" cy="16" r="2"/></svg><span>الأدوات</span></button><button class="b" id="qb"><svg class="ic" viewBox="0 0 24 24" aria-hidden="true"><path d="M7 17h3l1-5V7H5v5h3"/><path d="M16 17h3l1-5V7h-6v5h3"/></svg><span>الاقتباسات</span></button><button class="b" id="svb"><svg class="ic" viewBox="0 0 24 24" aria-hidden="true"><path d="M7 4h10v16l-5-4-5 4z"/></svg><span>المحفوظات</span></button><button class="b" id="nbb"><svg class="ic" viewBox="0 0 24 24" aria-hidden="true"><path d="M6 3h12v18H6z"/><path d="M10 3v18M13 8h3"/></svg><span>النوت بوك</span></button>
+<button class="b" id="home"><svg class="ic" viewBox="0 0 24 24" aria-hidden="true"><path d="M5 4h4v16H5zM11 4h4v16h-4z"/><path d="M17.5 6l3 .8-3.5 13.2-3-.8z"/></svg><span>الكتب</span></button><button class="b" id="pv"><svg class="ic" viewBox="0 0 24 24" aria-hidden="true"><path d="M9 6l6 6-6 6"/></svg><span>السابقة</span></button><span id="lbl"></span><button class="b" id="nx"><svg class="ic" viewBox="0 0 24 24" aria-hidden="true"><path d="M15 6l-6 6 6 6"/></svg><span>التالية</span></button><button class="b" id="pen"><svg class="ic" viewBox="0 0 24 24" aria-hidden="true"><path d="M4 8h9M17 8h3M4 16h3M11 16h9"/><circle cx="15" cy="8" r="2"/><circle cx="9" cy="16" r="2"/></svg><span>الأدوات</span></button><button class="b" id="qb"><svg class="ic" viewBox="0 0 24 24" aria-hidden="true"><path d="M7 17h3l1-5V7H5v5h3"/><path d="M16 17h3l1-5V7h-6v5h3"/></svg><span>الاقتباسات</span></button><button class="b" id="tmb"><svg class="ic" viewBox="0 0 24 24" aria-hidden="true"><path d="M4 7V5h16v2M12 5v14M9 19h6"/></svg><span>قراءة النص</span></button><button class="b" id="svb"><svg class="ic" viewBox="0 0 24 24" aria-hidden="true"><path d="M7 4h10v16l-5-4-5 4z"/></svg><span>المحفوظات</span></button><button class="b" id="nbb"><svg class="ic" viewBox="0 0 24 24" aria-hidden="true"><path d="M6 3h12v18H6z"/><path d="M10 3v18M13 8h3"/></svg><span>النوت بوك</span></button>
 <button id="tg" aria-label="طي الأدوات" aria-expanded="true"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 15l6-6 6 6"/></svg></button></nav>
 <script>
 const CDN='https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/';
 const $=s=>document.querySelector(s);
-const IC={"read": "<path d=\"M5 3l14 8-6 2-2 6z\"/>", "pen": "<path d=\"M4 20l1-4L16 5l3 3L8 19z\"/><path d=\"M14 7l3 3\"/>", "hl": "<path d=\"M14 4l6 6-8 8-6-6z\"/><path d=\"M4 21h8\"/>", "quote": "<path d=\"M7 17h3l1-5V7H5v5h3\"/><path d=\"M16 17h3l1-5V7h-6v5h3\"/>", "note": "<path d=\"M5 4h14v11l-5 5H5z\"/><path d=\"M14 20v-5h5\"/>", "arrow": "<path d=\"M5 12h14\"/><path d=\"M13 6l6 6-6 6\"/>", "circle": "<circle cx=\"12\" cy=\"12\" r=\"8\"/>", "rect": "<rect x=\"4\" y=\"5\" width=\"16\" height=\"14\" rx=\"3\"/>", "move": "<path d=\"M12 3v18M3 12h18M9 6l3-3 3 3M9 18l3 3 3-3M6 9l-3 3 3 3M18 9l3 3-3 3\"/>", "erase": "<path d=\"M20 20H9l-5-5 10-10 6 6z\"/><path d=\"M7 12l6 6\"/>", "books": "<path d=\"M5 4h4v16H5zM11 4h4v16h-4z\"/><path d=\"M17.5 6l3 .8-3.5 13.2-3-.8z\"/>", "prev": "<path d=\"M9 6l6 6-6 6\"/>", "next": "<path d=\"M15 6l-6 6 6 6\"/>", "tools": "<path d=\"M4 8h9M17 8h3M4 16h3M11 16h9\"/><circle cx=\"15\" cy=\"8\" r=\"2\"/><circle cx=\"9\" cy=\"16\" r=\"2\"/>", "mark": "<path d=\"M7 4h10v16l-5-4-5 4z\"/>", "nb": "<path d=\"M6 3h12v18H6z\"/><path d=\"M10 3v18M13 8h3\"/>"};const ic=n=>'<svg class="ic" viewBox="0 0 24 24" aria-hidden="true">'+IC[n]+'</svg>';
+const IC={"read": "<path d=\"M5 3l14 8-6 2-2 6z\"/>", "pen": "<path d=\"M4 20l1-4L16 5l3 3L8 19z\"/><path d=\"M14 7l3 3\"/>", "hl": "<path d=\"M14 4l6 6-8 8-6-6z\"/><path d=\"M4 21h8\"/>", "quote": "<path d=\"M7 17h3l1-5V7H5v5h3\"/><path d=\"M16 17h3l1-5V7h-6v5h3\"/>", "note": "<path d=\"M5 4h14v11l-5 5H5z\"/><path d=\"M14 20v-5h5\"/>", "arrow": "<path d=\"M5 12h14\"/><path d=\"M13 6l6 6-6 6\"/>", "circle": "<circle cx=\"12\" cy=\"12\" r=\"8\"/>", "rect": "<rect x=\"4\" y=\"5\" width=\"16\" height=\"14\" rx=\"3\"/>", "move": "<path d=\"M12 3v18M3 12h18M9 6l3-3 3 3M9 18l3 3 3-3M6 9l-3 3 3 3M18 9l3 3-3 3\"/>", "erase": "<path d=\"M20 20H9l-5-5 10-10 6 6z\"/><path d=\"M7 12l6 6\"/>", "books": "<path d=\"M5 4h4v16H5zM11 4h4v16h-4z\"/><path d=\"M17.5 6l3 .8-3.5 13.2-3-.8z\"/>", "prev": "<path d=\"M9 6l6 6-6 6\"/>", "next": "<path d=\"M15 6l-6 6 6 6\"/>", "tools": "<path d=\"M4 8h9M17 8h3M4 16h3M11 16h9\"/><circle cx=\"15\" cy=\"8\" r=\"2\"/><circle cx=\"9\" cy=\"16\" r=\"2\"/>", "mark": "<path d=\"M7 4h10v16l-5-4-5 4z\"/>", "nb": "<path d=\"M6 3h12v18H6z\"/><path d=\"M10 3v18M13 8h3\"/>"};IC.text='<path d="M4 7V5h16v2M12 5v14M9 19h6"/>';
+const ic=n=>'<svg class="ic" viewBox="0 0 24 24" aria-hidden="true">'+IC[n]+'</svg>';
 const S={tool:'none',color:'#FFE680',qc:'#FFE680',tab:'tools',cur:0,io:null,sel:null};
 const dbp=new Promise((ok,no)=>{const r=indexedDB.open('reader',1);r.onupgradeneeded=()=>{r.result.createObjectStore('books',{keyPath:'id'});r.result.createObjectStore('meta',{keyPath:'id'})};r.onsuccess=()=>ok(r.result);r.onerror=()=>no(r.error)});
 const tx=async(st,m,fn)=>{const d=await dbp;return new Promise((ok,no)=>{const t=d.transaction(st,m);const q=fn(t.objectStore(st));t.oncomplete=()=>ok(q&&q.result);t.onerror=()=>no(t.error)})};
@@ -145,6 +147,11 @@ function pdfLib(){
  const L=src=>new Promise((ok,no)=>{const s=document.createElement('script');s.src=src;s.onload=ok;s.onerror=no;document.head.appendChild(s)});
  return L('lib/pdf.min.js').then(()=>'lib/pdf.worker.min.js').catch(()=>L(CDN+'pdf.min.js').then(()=>CDN+'pdf.worker.min.js')).then(w=>{pdfjsLib.GlobalWorkerOptions.workerSrc=w});
 }
+async function readTxt(bl){const u=new Uint8Array(await bl.arrayBuffer());
+ try{return new TextDecoder('utf-8',{fatal:true}).decode(u)}catch(_){}
+ if(u[0]===0xFF&&u[1]===0xFE)return new TextDecoder('utf-16le').decode(u);
+ if(u[0]===0xFE&&u[1]===0xFF)return new TextDecoder('utf-16be').decode(u);
+ return new TextDecoder('windows-1256').decode(u)}
 async function openBook(id){
  msg('');const b=await get('books',id);S.b=b;
  S.meta=(await get('meta',id))||{id,ann:[],saved:[],quotes:[],last:0,nb:{cur:0,pages:[{bg:'#FFFFFF',img:'',text:''}]}};
@@ -153,12 +160,12 @@ async function openBook(id){
  $('#lib').hidden=true;$('#rd').hidden=false;$('#bar').hidden=false;$('#ttl').textContent=b.name;$('#pages').innerHTML='';
  S.io&&S.io.disconnect();S.pgs=[];
  try{
- if(b.type==='pdf'){await pdfLib();S.pdf=await pdfjsLib.getDocument({data:await b.blob.arrayBuffer()}).promise;
+ if(b.type==='pdf'){await pdfLib();S.pdf=await pdfjsLib.getDocument({data:await b.blob.arrayBuffer(),disableFontFace:true}).promise;
   const v=(await S.pdf.getPage(1)).getViewport({scale:1});
   S.io=new IntersectionObserver(es=>es.forEach(x=>{if(x.isIntersecting&&!x.target.dataset.r){x.target.dataset.r=1;renderPdf(x.target)}}),{rootMargin:'700px'});
   for(let i=0;i<S.pdf.numPages;i++)mk(i,'<canvas></canvas>',v.width+'/'+v.height);
  }else{
-  const ps=(await b.blob.text()).split(/\n+/).map(t=>t.trim()).filter(Boolean);const pages=[];let c=[],n=0;
+  const ps=(await readTxt(b.blob)).split(/\n+/).map(t=>t.trim()).filter(Boolean);const pages=[];let c=[],n=0;
   ps.forEach(t=>{c.push(t);n+=t.length;if(n>900){pages.push(c);c=[];n=0}});if(c.length)pages.push(c);
   pages.forEach((p,i)=>{const d=mk(i,'<div class="tx"></div>');p.forEach(t=>{const e=document.createElement('p');e.textContent=t;d.querySelector('.tx').appendChild(e)});renderOv(d)});
  }}catch(err){msg('مقدرتش أفتح الكتاب ده: '+err.message);return}
@@ -312,6 +319,26 @@ const dragBar=(el,tap)=>el.addEventListener('pointerdown',e=>{const y0=e.clientY
  el.addEventListener('pointermove',mv);el.addEventListener('pointerup',end);el.addEventListener('pointercancel',end)});
 dragBar(tg,true);dragBar(bar,false);
 tg.onclick=e=>{if(e.detail===0)setUp(!bar.classList.contains('up'))};
+const loadJs=src=>new Promise((ok,no)=>{const e=document.createElement('script');e.src=src;e.onload=ok;e.onerror=no;document.head.appendChild(e)});
+async function pageText(i){const p=await S.pdf.getPage(i+1),c=await p.getTextContent(),rows=[];
+ c.items.forEach(it=>{if(typeof it.str!=='string')return;const y=Math.round(it.transform[5]);let r=rows.find(r=>Math.abs(r.y-y)<=3);if(!r){r={y,a:[]};rows.push(r)}r.a.push([it.transform[4],it.str])});
+ rows.sort((a,b)=>b.y-a.y);return rows.map(r=>r.a.sort((a,b)=>b[0]-a[0]).map(q=>q[1]).join('').replace(/ {2,}/g,' ').trim()).filter(Boolean).join('\n')}
+async function ocrPage(i){if(!window.Tesseract)await loadJs('https://cdn.jsdelivr.net/npm/tesseract.js@5.1.1/dist/tesseract.min.js');
+ const p=await S.pdf.getPage(i+1),v=p.getViewport({scale:2}),c=document.createElement('canvas');c.width=v.width;c.height=v.height;
+ await p.render({canvasContext:c.getContext('2d'),viewport:v}).promise;return (await Tesseract.recognize(c,'ara')).data.text}
+let tmTok=0;
+async function setTM(on){S.tm=on;$('#tmb').classList.toggle('on',on);
+ if(!on){tmTok++;$('#txv').hidden=true;$('#pages').hidden=false;return}
+ if(!S.b||S.b.type!=='pdf'){S.tm=false;$('#tmb').classList.remove('on');msg('ده كتاب نصي أصلاً.');setTimeout(()=>msg(''),1800);return}
+ $('#pages').hidden=true;const v=$('#txv');v.hidden=false;v.innerHTML='';const tok=++tmTok;
+ for(let i=0;i<S.pdf.numPages;i++){const sec=document.createElement('section');sec.className='pg tp';
+  sec.innerHTML='<div class="tx"><b></b><div class="body"></div><div class="row"><button class="b ocr">تعرّف بالصورة (OCR)</button></div></div>';
+  sec.querySelector('b').textContent='صفحة '+(i+1);v.appendChild(sec);const bd=sec.querySelector('.body');
+  let t=(S.meta.ocr&&S.meta.ocr[i])||'';if(!t)t=await pageText(i);if(tok!==tmTok)return;
+  bd.textContent=t.trim()||'(الصفحة دي صورة من غير نص. دوسي «تعرّف بالصورة».)';
+  sec.querySelector('.ocr').onclick=async e=>{const bt=e.currentTarget;bt.disabled=true;bt.textContent='جاري التعرف... أول مرة بينزّل اللغة العربية ولازم نت';
+   try{const tx=await ocrPage(i);S.meta.ocr=S.meta.ocr||{};S.meta.ocr[i]=tx;persist();bd.textContent=tx.trim()||'(ما لقيتش نص)';bt.textContent='تعرّف تاني'}catch(_){bt.textContent='فشل. جرّبي تاني ولازم نت'}bt.disabled=false}}}
+$('#tmb').onclick=()=>setTM(!S.tm);$('#home').addEventListener('click',()=>setTM(false));
 if('serviceWorker'in navigator)navigator.serviceWorker.register('sw.js').catch(()=>{});
 lib();
 </script>
