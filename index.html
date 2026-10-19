@@ -107,10 +107,46 @@ body{padding-bottom:calc(40px + env(safe-area-inset-bottom,0px))}
 #tg{touch-action:none}
 </style>
 <style>.tp .tx b{display:block;color:#6B6055;font-size:14px;margin-bottom:10px}.tp .body{white-space:pre-wrap;font-family:'Amiri','Traditional Arabic','Segoe UI',Tahoma,serif;font-size:21px;line-height:2.1}.tp .row{margin:16px 0 0}.tp .b{color:#1F2430;border-color:#C9BCA2;font-size:13px;min-height:40px}</style>
+<style>
+/* واجهة الاستقبال والمكتبة */
+@keyframes fu{from{opacity:0;transform:translateY(16px)}to{opacity:1;transform:none}}
+@keyframes fl{0%,100%{transform:translateY(0)}50%{transform:translateY(-10px)}}
+@keyframes fi{from{opacity:0}to{opacity:1}}
+#wel{position:fixed;inset:0;z-index:50;display:flex;align-items:center;justify-content:center;text-align:center;padding:24px;background:repeating-linear-gradient(90deg,rgba(255,255,255,.03) 0 2px,transparent 2px 56px),radial-gradient(ellipse at 50% 0%,#3A5068 0%,#1B2636 50%,#101722 100%);overflow:hidden;transition:opacity .7s ease,transform .7s ease}
+#wel.out{opacity:0;transform:scale(1.06);pointer-events:none}
+#wel .o1,#wel .o2{position:absolute;border-radius:50%;filter:blur(70px);opacity:.35}
+#wel .o1{width:340px;height:340px;background:#F5B544;top:-90px;left:-70px;opacity:.18}
+#wel .o2{width:380px;height:380px;background:#4348B8;bottom:-120px;right:-90px}
+#wel .wc{position:relative;max-width:420px;display:flex;flex-direction:column;align-items:center;gap:14px}
+#wel .wl{animation:fl 4s ease-in-out infinite;filter:drop-shadow(0 18px 30px #0008)}
+#wel .wc>*{animation:fu .8s both}
+#wel .wl{animation:fl 4s ease-in-out infinite,fu .8s both}
+#wel h1{margin:6px 0 0;font-size:44px;letter-spacing:.5px;font-family:'Amiri','Traditional Arabic',serif;animation-delay:.15s}
+#wel p{margin:0;color:var(--mute);font-size:17px;line-height:2;animation-delay:.3s}
+#wel .b{animation-delay:.45s;margin-top:10px;min-height:54px;padding:0 32px;font-size:17px;display:inline-flex;align-items:center;gap:10px;box-shadow:0 14px 30px -10px #F5B544aa}
+#wel .b .ic{color:#1B1740}
+#hero{display:none;max-width:1100px;margin:0 auto;padding:36px 24px 0}
+body:has(#lib:not([hidden])) #hero{display:block;animation:fu .7s both}
+#hero .hk{color:var(--amber);font-size:14px;font-weight:700;letter-spacing:.5px}
+#hero h2{margin:6px 0 4px;font-size:38px;font-family:'Amiri','Traditional Arabic',serif}
+#hero p{margin:0;color:var(--mute);font-size:16px;line-height:1.9}
+#lib{padding-top:22px;gap:30px}
+.card{animation:fu .6s both}
+.card:nth-child(2){animation-delay:.06s}.card:nth-child(3){animation-delay:.12s}.card:nth-child(4){animation-delay:.18s}.card:nth-child(5){animation-delay:.24s}.card:nth-child(6){animation-delay:.3s}
+.cover{transition:transform .3s cubic-bezier(.2,.8,.2,1),box-shadow .3s;font-family:'Amiri','Traditional Arabic',serif;font-size:21px}
+.cover::after{content:"";position:absolute;inset:0;border-radius:inherit;background:linear-gradient(100deg,rgba(255,255,255,.16),transparent 35%,rgba(0,0,0,.18));pointer-events:none}
+.cover:hover{transform:translateY(-8px) rotate(-1.2deg);box-shadow:inset -12px 0 0 #0003,0 24px 36px -8px #000a}
+.card .b.red{border-color:transparent;background:#ffffff0d;border-radius:14px;min-height:38px;font-size:13px}
+#lib>p{border:1.5px dashed #3C4F68;border-radius:26px;background:#ffffff08;margin:10px 0}
+#rd:not([hidden]){animation:fi .5s both}
+@media (prefers-reduced-motion:reduce){#wel *,.card,#hero{animation:none!important}#wel,.cover{transition:none}}
+</style>
 </head>
 <body data-tool="none">
+<div id="wel" role="dialog" aria-label="مرحباً"><i class="o1"></i><i class="o2"></i><div class="wc"><div class="wl"><svg width="96" height="96" viewBox="0 0 64 64" aria-hidden="true"><defs><linearGradient id="lg2" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#4348B8"/><stop offset="1" stop-color="#12143A"/></linearGradient></defs><rect width="64" height="64" rx="16" fill="url(#lg2)"/><path d="M32 20C26 16 18 16 12 18V44C18 42 26 42 32 46Z" fill="#F4F1FF"/><path d="M32 20C38 16 46 16 52 18V44C46 42 38 42 32 46Z" fill="#D7D2F4"/><path d="M38 13H46V30L42 26L38 30Z" fill="#F5B544"/><circle cx="19" cy="11" r="2.2" fill="#F5B544"/></svg></div><h1>مكتبتي</h1><p>اقري، ظلّلي، اكتبي ملاحظاتك واقتباساتك.<br>كل كتبك وأفكارك في مكان واحد هادي.</p><button id="welgo" class="b pri">ابدأي القراءة<svg class="ic" viewBox="0 0 24 24" aria-hidden="true"><path d="M15 6l-6 6 6 6"/></svg></button></div></div>
 <header><div class="brand"><svg width="42" height="42" viewBox="0 0 64 64" aria-hidden="true"><defs><linearGradient id="lg" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#4348B8"/><stop offset="1" stop-color="#12143A"/></linearGradient></defs><rect width="64" height="64" rx="16" fill="url(#lg)"/><path d="M32 20C26 16 18 16 12 18V44C18 42 26 42 32 46Z" fill="#F4F1FF"/><path d="M32 20C38 16 46 16 52 18V44C46 42 38 42 32 46Z" fill="#D7D2F4"/><path d="M38 13H46V30L42 26L38 30Z" fill="#F5B544"/><circle cx="19" cy="11" r="2.2" fill="#F5B544"/></svg><h1 id="ttl">مكتبتي</h1></div><div class="row" style="margin:0"><button class="b" id="inst" hidden>تثبيت التطبيق</button><label class="b pri">إضافة كتاب (PDF أو نص)<input id="add" type="file" accept=".pdf,.txt,.md,application/pdf,text/plain" multiple></label></div></header>
 <p id="msg" hidden></p>
+<section id="hero"><div class="hk">مكتبتك الشخصية</div><h2>كتبك، بهدوء.</h2><p>اختاري كتاب وكملي من حيث وقفتي، أو أضيفي كتاب جديد.</p></section>
 <main id="lib"></main>
 <main id="rd" hidden><div id="pages"></div><div id="txv" hidden></div></main>
 <section id="panel" hidden></section>
@@ -339,6 +375,9 @@ async function setTM(on){S.tm=on;$('#tmb').classList.toggle('on',on);
   sec.querySelector('.ocr').onclick=async e=>{const bt=e.currentTarget;bt.disabled=true;bt.textContent='جاري التعرف... أول مرة بينزّل اللغة العربية ولازم نت';
    try{const tx=await ocrPage(i);S.meta.ocr=S.meta.ocr||{};S.meta.ocr[i]=tx;persist();bd.textContent=tx.trim()||'(ما لقيتش نص)';bt.textContent='تعرّف تاني'}catch(_){bt.textContent='فشل. جرّبي تاني ولازم نت'}bt.disabled=false}}}
 $('#tmb').onclick=()=>setTM(!S.tm);$('#home').addEventListener('click',()=>setTM(false));
+(function(){const w=$('#wel');let seen=false;try{seen=sessionStorage.getItem('wel')}catch(_){}
+if(seen){w.remove();return}
+$('#welgo').onclick=()=>{w.classList.add('out');try{sessionStorage.setItem('wel','1')}catch(_){}setTimeout(()=>w.remove(),750)}})();
 if('serviceWorker'in navigator)navigator.serviceWorker.register('sw.js').catch(()=>{});
 lib();
 </script>
