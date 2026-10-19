@@ -84,6 +84,28 @@ header,.sh{background:#101722ee;border-bottom-color:#2C3C52}
 .nh .sv.pop{background:#1F8A5B;color:#fff;border-radius:50%;animation:pp .3s ease}
 @keyframes pp{50%{transform:scale(1.3)}}
 </style>
+<style>
+/* شريط الأدوات كستارة من فوق */
+body{padding-bottom:calc(40px + env(safe-area-inset-bottom,0px))}
+#bar{inset:0 0 auto 0;z-index:8;border-top:0;border-bottom:2px solid var(--amber);padding:calc(10px + env(safe-area-inset-top,0px)) 12px 10px;border-radius:0 0 22px 22px;box-shadow:0 14px 30px -12px #000a;transition:transform .35s cubic-bezier(.2,.8,.2,1)}
+#bar.up{transform:translateY(-100%);box-shadow:none}
+#tg{position:absolute;top:100%;left:50%;transform:translateX(-50%);width:84px;height:30px;padding:0;border:0;border-bottom:2px solid var(--amber);border-radius:0 0 18px 18px;background:#101722f2;color:var(--amber);cursor:pointer;display:flex;align-items:center;justify-content:center;backdrop-filter:blur(10px)}
+#tg svg{transition:transform .35s}
+#bar.up #tg svg{transform:rotate(180deg)}
+#panel{inset:auto 0 auto 0;bottom:auto!important;top:var(--bh,70px);z-index:7;padding-top:40px;border-radius:0 0 28px 28px;border-top:0;box-shadow:0 18px 30px #0008}
+#rd{padding-top:calc(var(--pad,0px) + 16px);transition:padding-top .35s}
+</style>
+<style>
+.ic{width:20px;height:20px;fill:none;stroke:currentColor;stroke-width:2;stroke-linecap:round;stroke-linejoin:round;flex:none}
+#panel .b{display:inline-flex;align-items:center;gap:8px;border-radius:16px}
+#panel .b .ic{color:var(--amber)}
+#panel .b.on .ic{color:#1B1740}
+#bar{touch-action:none}
+#bar .b{display:flex;flex-direction:column;align-items:center;justify-content:center;gap:3px;min-width:64px;min-height:56px;padding:6px 10px;border-radius:16px;border-color:transparent;background:#ffffff12;font-size:12px}
+#bar .b .ic{width:22px;height:22px;color:var(--amber)}
+#bar .b.on .ic{color:#1B1740}
+#tg{touch-action:none}
+</style>
 </head>
 <body data-tool="none">
 <header><div class="brand"><svg width="42" height="42" viewBox="0 0 64 64" aria-hidden="true"><defs><linearGradient id="lg" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#4348B8"/><stop offset="1" stop-color="#12143A"/></linearGradient></defs><rect width="64" height="64" rx="16" fill="url(#lg)"/><path d="M32 20C26 16 18 16 12 18V44C18 42 26 42 32 46Z" fill="#F4F1FF"/><path d="M32 20C38 16 46 16 52 18V44C46 42 38 42 32 46Z" fill="#D7D2F4"/><path d="M38 13H46V30L42 26L38 30Z" fill="#F5B544"/><circle cx="19" cy="11" r="2.2" fill="#F5B544"/></svg><h1 id="ttl">مكتبتي</h1></div><div class="row" style="margin:0"><button class="b" id="inst" hidden>تثبيت التطبيق</button><label class="b pri">إضافة كتاب (PDF أو نص)<input id="add" type="file" accept=".pdf,.txt,.md,application/pdf,text/plain" multiple></label></div></header>
@@ -93,11 +115,12 @@ header,.sh{background:#101722ee;border-bottom-color:#2C3C52}
 <section id="panel" hidden></section>
 <section id="sheet" hidden></section>
 <nav id="bar" hidden>
-<button class="b" id="home">الكتب</button><button class="b" id="pv">السابقة</button><span id="lbl"></span><button class="b" id="nx">التالية</button><button class="b" id="pen">✏️ الأدوات</button><button class="b" id="qb">❝ الاقتباسات</button><button class="b" id="svb">🔖 المحفوظات</button><button class="b" id="nbb">📓 النوت بوك</button>
-</nav>
+<button class="b" id="home"><svg class="ic" viewBox="0 0 24 24" aria-hidden="true"><path d="M5 4h4v16H5zM11 4h4v16h-4z"/><path d="M17.5 6l3 .8-3.5 13.2-3-.8z"/></svg><span>الكتب</span></button><button class="b" id="pv"><svg class="ic" viewBox="0 0 24 24" aria-hidden="true"><path d="M9 6l6 6-6 6"/></svg><span>السابقة</span></button><span id="lbl"></span><button class="b" id="nx"><svg class="ic" viewBox="0 0 24 24" aria-hidden="true"><path d="M15 6l-6 6 6 6"/></svg><span>التالية</span></button><button class="b" id="pen"><svg class="ic" viewBox="0 0 24 24" aria-hidden="true"><path d="M4 8h9M17 8h3M4 16h3M11 16h9"/><circle cx="15" cy="8" r="2"/><circle cx="9" cy="16" r="2"/></svg><span>الأدوات</span></button><button class="b" id="qb"><svg class="ic" viewBox="0 0 24 24" aria-hidden="true"><path d="M7 17h3l1-5V7H5v5h3"/><path d="M16 17h3l1-5V7h-6v5h3"/></svg><span>الاقتباسات</span></button><button class="b" id="svb"><svg class="ic" viewBox="0 0 24 24" aria-hidden="true"><path d="M7 4h10v16l-5-4-5 4z"/></svg><span>المحفوظات</span></button><button class="b" id="nbb"><svg class="ic" viewBox="0 0 24 24" aria-hidden="true"><path d="M6 3h12v18H6z"/><path d="M10 3v18M13 8h3"/></svg><span>النوت بوك</span></button>
+<button id="tg" aria-label="طي الأدوات" aria-expanded="true"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 15l6-6 6 6"/></svg></button></nav>
 <script>
 const CDN='https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/';
 const $=s=>document.querySelector(s);
+const IC={"read": "<path d=\"M5 3l14 8-6 2-2 6z\"/>", "pen": "<path d=\"M4 20l1-4L16 5l3 3L8 19z\"/><path d=\"M14 7l3 3\"/>", "hl": "<path d=\"M14 4l6 6-8 8-6-6z\"/><path d=\"M4 21h8\"/>", "quote": "<path d=\"M7 17h3l1-5V7H5v5h3\"/><path d=\"M16 17h3l1-5V7h-6v5h3\"/>", "note": "<path d=\"M5 4h14v11l-5 5H5z\"/><path d=\"M14 20v-5h5\"/>", "arrow": "<path d=\"M5 12h14\"/><path d=\"M13 6l6 6-6 6\"/>", "circle": "<circle cx=\"12\" cy=\"12\" r=\"8\"/>", "rect": "<rect x=\"4\" y=\"5\" width=\"16\" height=\"14\" rx=\"3\"/>", "move": "<path d=\"M12 3v18M3 12h18M9 6l3-3 3 3M9 18l3 3 3-3M6 9l-3 3 3 3M18 9l3 3-3 3\"/>", "erase": "<path d=\"M20 20H9l-5-5 10-10 6 6z\"/><path d=\"M7 12l6 6\"/>", "books": "<path d=\"M5 4h4v16H5zM11 4h4v16h-4z\"/><path d=\"M17.5 6l3 .8-3.5 13.2-3-.8z\"/>", "prev": "<path d=\"M9 6l6 6-6 6\"/>", "next": "<path d=\"M15 6l-6 6 6 6\"/>", "tools": "<path d=\"M4 8h9M17 8h3M4 16h3M11 16h9\"/><circle cx=\"15\" cy=\"8\" r=\"2\"/><circle cx=\"9\" cy=\"16\" r=\"2\"/>", "mark": "<path d=\"M7 4h10v16l-5-4-5 4z\"/>", "nb": "<path d=\"M6 3h12v18H6z\"/><path d=\"M10 3v18M13 8h3\"/>"};const ic=n=>'<svg class="ic" viewBox="0 0 24 24" aria-hidden="true">'+IC[n]+'</svg>';
 const S={tool:'none',color:'#FFE680',qc:'#FFE680',tab:'tools',cur:0,io:null,sel:null};
 const dbp=new Promise((ok,no)=>{const r=indexedDB.open('reader',1);r.onupgradeneeded=()=>{r.result.createObjectStore('books',{keyPath:'id'});r.result.createObjectStore('meta',{keyPath:'id'})};r.onsuccess=()=>ok(r.result);r.onerror=()=>no(r.error)});
 const tx=async(st,m,fn)=>{const d=await dbp;return new Promise((ok,no)=>{const t=d.transaction(st,m);const q=fn(t.objectStore(st));t.oncomplete=()=>ok(q&&q.result);t.onerror=()=>no(t.error)})};
@@ -218,12 +241,12 @@ function down(e,d){
   S.tool='none';document.body.dataset.tool='none';$('#panel').hidden=true;$('#pen').classList.remove('on');
   const ns=d.querySelectorAll('.note');if(ns.length){const nn=ns[ns.length-1];nn.scrollIntoView({block:'nearest'});if(!text)nn.querySelector('textarea').focus()}}
 }
-const TOOLS=[['none','👆 قراءة / تمرير'],['pen','✏️ قلم'],['hl','🖍 هايلايتر'],['quote','❝ اقتباس'],['note','📝 ملاحظة'],['arrow','➡️ سهم'],['circle','⭕ دايرة'],['rect','⬜ مربع'],['sel','↔️ تحريك / تكبير / تصغير'],['erase','🧽 مسح']];
+const TOOLS=[['none',ic('read')+'قراءة / تمرير'],['pen',ic('pen')+'قلم'],['hl',ic('hl')+'هايلايتر'],['quote',ic('quote')+'اقتباس'],['note',ic('note')+'ملاحظة'],['arrow',ic('arrow')+'سهم'],['circle',ic('circle')+'دايرة'],['rect',ic('rect')+'مربع'],['sel',ic('move')+'تحريك / تكبير / تصغير'],['erase',ic('erase')+'مسح']];
 const PAL=['#FFE680','#BFE8C0','#BFDDF5','#F7C6D9','#FFD3A6','#E3C9F5','#FFB3A7','#D9D9D9'],BG=['#FFFFFF','#F6EBD0','#E6E8EC','#DCEBFA','#DDF1DF','#9AA3B2'];
 const sw=(arr,act,cur)=>arr.map(c=>`<button class="sw" aria-label="لون" data-a="${act}" data-v="${c}" style="background:${c};${cur===c?'border:3px solid #F5B544':''}"></button>`).join('');
 function panel(){
  const p=$('#panel');if(p.hidden)return;p.style.bottom=$('#bar').offsetHeight+'px';const m=S.meta;if(S.tab!=='saved')S.tab='tools';
- const tabs=[['tools','🛠 الأدوات'],['saved','🔖 المحفوظات']].map(([k,l])=>`<button class="b ${S.tab===k?'on':''}" data-a="tab" data-v="${k}">${l}</button>`).join('')+'<button class="b" data-a="sheet" data-v="quotes">❝ الاقتباسات</button><button class="b" data-a="sheet" data-v="nb">📓 النوت بوك</button>';
+ const tabs=[['tools',ic('tools')+'الأدوات'],['saved',ic('mark')+'المحفوظات']].map(([k,l])=>`<button class="b ${S.tab===k?'on':''}" data-a="tab" data-v="${k}">${l}</button>`).join('')+'<button class="b" data-a="sheet" data-v="quotes">'+ic('quote')+'الاقتباسات</button><button class="b" data-a="sheet" data-v="nb">'+ic('nb')+'النوت بوك</button>';
  let h=`<div class="row">${tabs}</div>`;
  if(S.tab==='tools')h+=`<div class="row">${TOOLS.map(([k,l])=>`<button class="b ${S.tool===k?'on':''}" data-a="tool" data-v="${k}">${l}</button>`).join('')}</div><div class="row"><span>لون الهايلايتر:</span>${sw(PAL,'col',S.color)}<input type="color" id="hci" value="${S.color}" aria-label="لون آخر"></div><div class="row"><span>لون الاقتباس:</span>${sw(PAL,'qcol',S.qc)}<input type="color" id="qci" value="${S.qc}" aria-label="لون آخر"></div><p style="font-size:14px;margin:0;line-height:1.8">اختاري أداة ودوسي على الصفحة. الدايرة والمربع والسهم: اسحبي بصباعك لتحديد الحجم، وبعدها اسحبي النقطة الصفرا لتكبير أو تصغير. أداة «تحريك / تكبير / تصغير» تعدّل أي شكل قديم. الاقتباس والملاحظة: اسحبي ⠿ للتحريك والزاوية السفلية للتكبير.</p>`;
  else h+=m.saved.length?m.saved.map((t,i)=>`<div class="it"><span></span><button class="b red" data-a="rm" data-v="${i}">حذف</button></div>`).join(''):'<p>لسه فاضي.</p>';
@@ -279,6 +302,16 @@ $('#svb').onclick=()=>{S.tab='saved';const p=$('#panel');p.hidden=false;$('#pen'
 $('#qb').onclick=()=>openSheet('quotes');$('#nbb').onclick=()=>openSheet('nb');
 let dp;addEventListener('beforeinstallprompt',e=>{e.preventDefault();dp=e;$('#inst').hidden=false});
 $('#inst').onclick=()=>{dp&&dp.prompt();$('#inst').hidden=true};
+const setBH=()=>{const b=$('#bar'),r=document.documentElement.style;if(b.hidden){r.setProperty('--pad','0px');return}const h=b.offsetHeight;r.setProperty('--bh',h+'px');r.setProperty('--pad',b.classList.contains('up')?'0px':h+'px')};
+new MutationObserver(setBH).observe($('#bar'),{attributes:true,attributeFilter:['hidden','class']});addEventListener('resize',setBH);setBH();
+const bar=$('#bar'),tg=$('#tg');
+const setUp=u=>{bar.classList.toggle('up',u);tg.setAttribute('aria-expanded',String(!u));tg.setAttribute('aria-label',u?'إنزال الأدوات':'طي الأدوات');if(u){$('#panel').hidden=true;$('#pen').classList.remove('on')}};
+const dragBar=(el,tap)=>el.addEventListener('pointerdown',e=>{const y0=e.clientY,h=bar.offsetHeight,up0=bar.classList.contains('up'),base=up0?-h:0;let moved=false,pos=base;
+ const mv=ev=>{const dy=ev.clientY-y0;if(!moved&&Math.abs(dy)>8){moved=true;try{el.setPointerCapture(e.pointerId)}catch(_){}bar.style.transition='none'}if(!moved)return;pos=Math.max(-h,Math.min(0,base+dy));bar.style.transform='translateY('+pos+'px)'};
+ const end=()=>{el.removeEventListener('pointermove',mv);el.removeEventListener('pointerup',end);el.removeEventListener('pointercancel',end);bar.style.transition='';bar.style.transform='';if(moved)setUp(pos<-h/2);else if(tap)setUp(!up0)};
+ el.addEventListener('pointermove',mv);el.addEventListener('pointerup',end);el.addEventListener('pointercancel',end)});
+dragBar(tg,true);dragBar(bar,false);
+tg.onclick=e=>{if(e.detail===0)setUp(!bar.classList.contains('up'))};
 if('serviceWorker'in navigator)navigator.serviceWorker.register('sw.js').catch(()=>{});
 lib();
 </script>
