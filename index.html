@@ -93,10 +93,10 @@ button{cursor:pointer}
 #prog i{display:block;height:100%;width:0;background:var(--ac);transition:width .2s}
 #rd{background:var(--bk);min-height:100vh}
 #pages{padding:calc(76px + env(safe-area-inset-top,0px)) clamp(8px,3vw,32px) 80px}
-.pg{position:relative;background:var(--pg);width:min(100%,920px);margin:0 auto 16px;border-radius:2px;box-shadow:var(--sh);overflow:hidden}
+.pg{position:relative;background:var(--pg);width:min(100%,920px);margin:0 auto 16px;border-radius:2px;border:1px solid var(--line);contain:layout paint;overflow:hidden}
 .pg canvas{display:block;width:100%;height:100%}
 .hlL,.textLayer{position:absolute;left:0;top:0;right:auto}
-.hlL{inset:0;mix-blend-mode:multiply;pointer-events:none}
+.hlL{inset:0;pointer-events:none}
 .hr{position:absolute;background:var(--hl);opacity:.5;border-radius:1px}
 .textLayer{overflow:hidden;line-height:1;direction:ltr}
 .textLayer span,.textLayer br{color:transparent;position:absolute;white-space:pre;transform-origin:0 0;cursor:text;-webkit-user-select:text;user-select:text}
@@ -114,6 +114,8 @@ mark[data-z="3"]{padding:.22em 3px;-webkit-box-decoration-break:clone;box-decora
 
 .flash{animation:fl 1.6s ease}
 @keyframes fl{0%,60%{outline:3px solid var(--ac);outline-offset:2px}100%{outline:3px solid transparent}}
+#pages.hm .textLayer span{-webkit-user-select:none;user-select:none}
+#hm[aria-pressed=true]{background:var(--acs);color:var(--ac)}
 /* لوحة التظليلات */
 #sc{position:fixed;inset:0;z-index:20;background:#0007}
 #pn{position:fixed;z-index:21;background:var(--sf);box-shadow:0 -10px 50px #0006;display:flex;flex-direction:column;inset-inline:0;bottom:0;max-height:78vh;border-radius:12px 12px 0 0;animation:sh .3s cubic-bezier(.2,.8,.2,1)}
@@ -174,6 +176,7 @@ mark[data-z="3"]{padding:.22em 3px;-webkit-box-decoration-break:clone;box-decora
 <header id="rb">
 <button class="ib" id="back" aria-label="العودة إلى المكتبة"><svg class="ic" viewBox="0 0 24 24" aria-hidden="true"><path d="M9 6l6 6-6 6"/></svg></button>
 <div class="rt"><div id="ttl"></div><div id="pgl"></div></div>
+<button class="ib" id="hm" aria-label="وضع التظليل بالسحب" aria-pressed="false"><svg class="ic" viewBox="0 0 24 24" aria-hidden="true"><path d="M4 20h16M7 16l9-9 3 3-9 9H7z"/></svg></button>
 <button class="ib" id="sz" aria-label="حجم التظليل" aria-haspopup="true"><svg class="ic" viewBox="0 0 24 24" aria-hidden="true"><path d="M14 4l6 6-8 8-6-6z"/><path d="M4 21h8"/></svg></button>
 <button class="ib" id="hb" aria-label="التظليلات"><svg class="ic" viewBox="0 0 24 24" aria-hidden="true"><path d="M14 4l6 6-8 8-6-6z"/><path d="M4 21h8"/></svg><span id="hc" hidden></span></button>
 </header>
@@ -307,7 +310,7 @@ async function openBook(id){const b=await get('books',id);if(!b)return;S.b=b;S.m
  try{
   if(b.type==='pdf'){await pdfLib();S.pdf=await pdfjsLib.getDocument({data:await b.blob.arrayBuffer(),...PDFOPT}).promise;
    const v=(await S.pdf.getPage(1)).getViewport({scale:1});
-   S.io=new IntersectionObserver(es=>es.forEach(x=>{if(x.isIntersecting)renderPdf(x.target)}),{rootMargin:'900px'});
+   S.io=new IntersectionObserver(es=>es.forEach(x=>{const d=x.target;if(x.isIntersecting){if(!RQ.includes(d)){RQ.push(d);pump()}}else{const k=RQ.indexOf(d);if(k>-1)RQ.splice(k,1);const c=d.querySelector('canvas');if(c&&c.width>1){c.width=c.height=1;d.dataset.w='';d.querySelector('.textLayer').innerHTML=''}}}),{rootMargin:'700px'});
    for(let i=0;i<S.pdf.numPages;i++){const d=mk(i,'<canvas></canvas><div class="hlL"></div><div class="textLayer" dir="ltr"></div>',v.width+'/'+v.height);S.io.observe(d);paintPage(d)}
    S.meta.total=S.pdf.numPages;
   }else{
@@ -318,6 +321,7 @@ async function openBook(id){const b=await get('books',id);if(!b)return;S.b=b;S.m
  const last=Math.min(S.meta.last||0,S.pgs.length-1);if(last>0&&S.pgs[last])S.pgs[last].scrollIntoView();
  progress();count();persist();
  }
+const RQ=[];let rb=0;const pump=async()=>{if(rb>=2||!RQ.length)return;const d=RQ.shift();rb++;try{await renderPdf(d)}catch(_){}rb--;pump()};
 async function renderPdf(d){const w=d.clientWidth;if(!w||d.dataset.w==w)return;d.dataset.w=w;
  const page=await S.pdf.getPage(+d.dataset.i+1),v0=page.getViewport({scale:1}),sc=w/v0.width,dpr=Math.min(devicePixelRatio||1,2),v=page.getViewport({scale:sc*dpr}),c=d.querySelector('canvas');
  c.width=v.width;c.height=v.height;d.style.aspectRatio=v0.width+'/'+v0.height;
@@ -326,9 +330,9 @@ async function renderPdf(d){const w=d.clientWidth;if(!w||d.dataset.w==w)return;d
  try{const tc=await page.getTextContent();if(pdfjsLib.renderTextLayer)await pdfjsLib.renderTextLayer({textContentSource:tc,container:tl,viewport:vt,textDivs:[]}).promise;else if(pdfjsLib.TextLayer)await new pdfjsLib.TextLayer({textContentSource:tc,container:tl,viewport:vt}).render()}catch(err){console.warn('textLayer',err)}}
 function closeBook(){persist();$('#rd').hidden=true;$('#lib').hidden=false;closePanel();hidePop();S.io&&S.io.disconnect();setTimeout(lib,350)}
 $('#back').onclick=closeBook;
-function progress(){const n=S.pgs.length;if(!n)return;const y=innerHeight*.4;let k=S.cur;
- for(let i=0;i<n;i++){const r=S.pgs[i].getBoundingClientRect();if(r.top<=y&&r.bottom>y){k=i;break}}
- S.cur=k;S.meta.last=k;$('#pgl').textContent='صفحة '+fmt(k+1)+' من '+fmt(n);$('#prog i').style.width=(100*(k+1)/n)+'%'}
+function progress(){const n=S.pgs.length;if(!n)return;const y=scrollY+innerHeight*.4;let a=0,b=n-1;
+ while(a<b){const m=(a+b+1)>>1;if(S.pgs[m].offsetTop<=y)a=m;else b=m-1}
+ S.cur=S.meta.last=a;$('#pgl').textContent='صفحة '+fmt(a+1)+' من '+fmt(n);$('#prog i').style.width=(100*(a+1)/n)+'%'}
 let ly=0,raf=0;addEventListener('scroll',()=>{if($('#rd').hidden)return;if(!raf)raf=requestAnimationFrame(()=>{raf=0;progress();persist();const y=scrollY;
  if(y>ly+8&&y>90)$('#rb').classList.add('off');else if(y<ly-8||y<90)$('#rb').classList.remove('off');ly=y;hidePop()})},{passive:true});
 let rz;addEventListener('resize',()=>{clearTimeout(rz);rz=setTimeout(()=>{if(S.b&&S.b.type==='pdf'&&!$('#rd').hidden)S.pgs.forEach(d=>{const r=d.getBoundingClientRect();if(r.bottom>-900&&r.top<innerHeight+900)renderPdf(d)})},250)});
@@ -363,7 +367,7 @@ function updBadge(){const cur=S.meta&&S.meta.id,t=S.bs.reduce((a,b)=>a+((b.id===
 function removeHl(id){const h=S.meta.hl.find(x=>x.id===id);if(!h)return;S.meta.hl=S.meta.hl.filter(x=>x!==h);repaint(h);count();persist();if(!$('#pn').hidden)drawPanel();
  toast('تمت إزالة التظليل','تراجع',()=>{S.meta.hl.push(h);repaint(h);count();persist();if(!$('#pn').hidden)drawPanel()})}
 let st,dn=false;addEventListener('pointerdown',e=>{if(e.pointerType==='mouse')dn=true},true);addEventListener('pointerup',()=>{if(dn){dn=false;clearTimeout(st);st=setTimeout(onSel,60)}},true);
-document.addEventListener('selectionchange',()=>{clearTimeout(st);if(dn)return;st=setTimeout(onSel,matchMedia('(pointer:coarse)').matches?700:250)});
+document.addEventListener('selectionchange',()=>{clearTimeout(st);if(dn)return;st=setTimeout(onSel,matchMedia('(pointer:coarse)').matches?1300:250)});
 function onSel(){if(!S.b||$('#rd').hidden||!$('#pn').hidden)return;const sel=getSelection();if(!sel||sel.isCollapsed||!sel.rangeCount)return;
  const rg=sel.getRangeAt(0);if(!$('#pages').contains(rg.commonAncestorContainer))return;
  const text=sel.toString().replace(/\s+/g,' ').trim();if(text.length<2)return;
@@ -400,6 +404,20 @@ $('#sz').onclick=e=>{e.stopPropagation();$('#szp').hidden=!$('#szp').hidden};
 document.querySelectorAll('#szp button').forEach(b=>b.onclick=()=>{setZ(+b.dataset.z);$('#szp').hidden=true});
 document.querySelectorAll('#set [data-z]').forEach(b=>b.onclick=()=>setZ(+b.dataset.z));
 document.addEventListener('click',e=>{if(!e.target.closest('#szp,#sz'))$('#szp').hidden=true});setZ(Z);
+
+/* وضع التظليل بالسحب: يعمل حتى على الكتب الممسوحة (صور) */
+let HM=false,dr=null,jd=0;
+$('#hm').onclick=()=>{HM=!HM;$('#hm').setAttribute('aria-pressed',String(HM));$('#pages').classList.toggle('hm',HM);$('#pages').style.touchAction=HM?'pan-y':'';getSelection().removeAllRanges();toast(HM?'وضع التظليل: اسحب/ي أفقيًا على السطر':'تم إيقاف وضع التظليل')};
+$('#pages').addEventListener('pointerdown',e=>{if(!HM||!S.b||S.b.type!=='pdf'||(e.pointerType==='mouse'&&e.button))return;const pg=e.target.closest('.pg');if(!pg)return;
+ dr={pg,r:pg.getBoundingClientRect(),x0:e.clientX,y0:e.clientY,el:document.createElement('i')};dr.el.className='hr';pg.querySelector('.hlL').appendChild(dr.el)});
+$('#pages').addEventListener('pointermove',e=>{if(!dr)return;const r=dr.r,H=[10,18,28][Z-1],x=Math.max(0,Math.min(dr.x0,e.clientX)-r.left),w=Math.min(Math.abs(e.clientX-dr.x0),r.width-x);
+ dr.rc=[x/r.width,(dr.y0-r.top-H/2)/r.height,w/r.width,H/r.height];dr.el.style.cssText='left:'+dr.rc[0]*100+'%;top:'+dr.rc[1]*100+'%;width:'+dr.rc[2]*100+'%;height:'+dr.rc[3]*100+'%'});
+addEventListener('pointerup',()=>{if(!dr)return;const d=dr;dr=null;d.el.remove();if(!d.rc||d.rc[2]<.02)return;jd=Date.now();
+ const i=+d.pg.dataset.i,h={id:crypto.randomUUID(),text:'تظليل على صفحة '+fmt(i+1),ts:Date.now(),z:2,parts:[{pg:i,rects:[d.rc.map(v=>+v.toFixed(4))]}]};
+ S.meta.hl.push(h);repaint(h);count();pulse();persist();
+ toast('حُفظ في التظليلات','تراجع',()=>{S.meta.hl=S.meta.hl.filter(x=>x!==h);repaint(h);count();persist()})});
+addEventListener('pointercancel',()=>{if(dr){dr.el.remove();dr=null}});
+$('#pages').addEventListener('click',e=>{if(Date.now()-jd<400)e.stopImmediatePropagation()},true);
 
 /* ===== التبويبات ===== */
 let TAB='lib';
