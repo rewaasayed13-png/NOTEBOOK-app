@@ -30,10 +30,6 @@ button{cursor:pointer}
 .brand .mk{width:34px;height:34px}
 .brand b{font-family:'Noto Naskh Arabic',Georgia,serif;font-size:26px;display:block;line-height:1.2}
 .brand small{color:var(--mute);font-size:13px}
-.sr{position:relative;flex:1 1 220px;max-width:360px;order:3}
-.sr input{width:100%;min-height:44px;border-radius:4px;border:1px solid var(--line);background:var(--sf);padding:0 44px 0 16px;font-size:15px;outline:0}
-.sr input:focus{border-color:var(--ac)}
-.sr .ic{position:absolute;top:11px;right:14px;color:var(--mute);pointer-events:none}
 #grid{max-width:1180px;margin:0 auto;padding:28px clamp(16px,4vw,40px) 60px;display:grid;grid-template-columns:repeat(auto-fill,minmax(168px,1fr));gap:24px 18px}
 .bk{position:relative;display:flex;flex-direction:column;gap:10px;animation:up .45s both}
 .cv{all:unset;box-sizing:border-box;cursor:pointer;aspect-ratio:2/3;border-radius:2px;display:flex;align-items:flex-start;padding:16px 16px 34px;color:#F4F1EA;font-family:'Noto Naskh Arabic',Georgia,serif;font-size:20px;font-weight:700;line-height:1.5;box-shadow:inset 4px 0 0 rgba(0,0,0,.18),var(--sh);position:relative;overflow:hidden}
@@ -59,7 +55,7 @@ button{cursor:pointer}
 #tabs button[aria-current=page]::before{content:"";position:absolute;top:-9px;width:24px;height:2px;background:var(--ac)}
 #tabs .ic{stroke-width:1.6}
 #lib[data-v=hls] .sr,#lib[data-v=set] .sr,#lib[data-v=hls] .btn.pri,#lib[data-v=set] .btn.pri{display:none}
-#allhl,#set{max-width:720px;margin:0 auto;padding:24px clamp(16px,4vw,40px) 40px;display:flex;flex-direction:column;gap:10px}
+#allhl,#set,#wr{max-width:720px;margin:0 auto;padding:24px clamp(16px,4vw,40px) 40px;display:flex;flex-direction:column;gap:10px}
 .gt{font-family:'Noto Naskh Arabic',Georgia,serif;font-weight:700;font-size:19px;margin:16px 0 2px}
 .sg{background:var(--sf);border:1px solid var(--line);border-radius:8px;padding:16px}
 .sg h3{margin:0 0 12px;font-size:15px}
@@ -116,6 +112,10 @@ mark[data-z="3"]{padding:.22em 3px;-webkit-box-decoration-break:clone;box-decora
 @keyframes fl{0%,60%{outline:3px solid var(--ac);outline-offset:2px}100%{outline:3px solid transparent}}
 #pages.hm .textLayer span{-webkit-user-select:none;user-select:none}
 #hm[aria-pressed=true]{background:var(--acs);color:var(--ac)}
+.sr{position:relative;flex:1 1 220px;max-width:360px;order:3}.sr input{width:100%;min-height:44px;border-radius:4px;border:1px solid var(--line);background:var(--sf);padding:0 44px 0 16px;font-size:15px;outline:0}.sr input:focus{border-color:var(--ac)}.sr .ic{position:absolute;top:11px;right:14px;color:var(--mute);pointer-events:none}
+#wr{padding-top:0;padding-bottom:30px}#wr:empty{display:none}
+.wn{color:var(--mute);font-size:12px;margin:0 0 6px}
+.wi{display:flex;align-items:center;gap:10px;border:1px solid var(--line);border-radius:8px;background:var(--sf);padding:12px 14px}.wi div{flex:1;min-width:0}.wi b{display:block;font-size:15px;line-height:1.6}.wi small{color:var(--mute);font-size:12px}.wi .btn{min-height:40px;padding:0 14px;font-size:13px;min-width:76px;justify-content:center}
 /* لوحة التظليلات */
 #sc{position:fixed;inset:0;z-index:20;background:#0007}
 #pn{position:fixed;z-index:21;background:var(--sf);box-shadow:0 -10px 50px #0006;display:flex;flex-direction:column;inset-inline:0;bottom:0;max-height:78vh;border-radius:12px 12px 0 0;animation:sh .3s cubic-bezier(.2,.8,.2,1)}
@@ -156,9 +156,10 @@ mark[data-z="3"]{padding:.22em 3px;-webkit-box-decoration-break:clone;box-decora
 <div class="brand"><svg class="mk" viewBox="0 0 40 40" aria-hidden="true"><rect width="40" height="40" rx="11" fill="var(--ac)"/><path d="M20 12c-3-2-7-2-9-1v17c2-1 6-1 9 1 3-2 7-2 9-1V11c-2-1-6-1-9 1zM20 12v17" fill="none" stroke="var(--acx)" stroke-width="2" stroke-linejoin="round" stroke-linecap="round"/></svg><div><b>Notebook</b></div></div>
 <button class="btn" id="inst" hidden>تثبيت التطبيق</button>
 <label class="btn pri"><svg class="ic" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 5v14M5 12h14"/></svg>إضافة كتاب<input id="add" type="file" accept=".pdf,.epub,.docx,.html,.htm,.xhtml,.md,.markdown,.txt,.cbz,application/pdf,text/plain" multiple></label>
-<div class="sr"><svg class="ic" viewBox="0 0 24 24" aria-hidden="true"><circle cx="11" cy="11" r="7"/><path d="M20 20l-4-4"/></svg><input id="q" type="search" placeholder="بحث في المكتبة" aria-label="بحث في المكتبة"></div>
+<form class="sr" id="sf"><svg class="ic" viewBox="0 0 24 24" aria-hidden="true"><circle cx="11" cy="11" r="7"/><path d="M20 20l-4-4"/></svg><input id="q" type="search" enterkeyhint="search" placeholder="ابحث في مكتبتك وعلى الإنترنت" aria-label="بحث عن كتاب"></form>
 </header>
 <main id="grid"></main>
+<div id="wr"></div>
 <main id="allhl" hidden></main>
 <main id="set" hidden>
 <div class="sg"><h3>حجم التظليل</h3><div class="so"><button class="sb" data-z="1"><i class="sw s1"></i>رفيع</button><button class="sb" data-z="2"><i class="sw s2"></i>متوسط</button><button class="sb" data-z="3"><i class="sw s3"></i>عريض</button></div></div>
@@ -218,7 +219,7 @@ function hue(s){let h=0;for(const c of s)h=(h*31+c.codePointAt(0))%360;return h}
 function draw(){const q=$('#q').value.trim().toLowerCase(),G=$('#grid');G.innerHTML='';
  if(!S.bs.length){G.innerHTML='<div class="em">'+svg('book')+'<h2>المكتبة فارغة</h2><div>اضغط/ي «إضافة كتاب» للبدء.</div><div class="fm">PDF · EPUB · DOCX · HTML · MD · TXT · CBZ</div></div>';return}
  const list=S.bs.filter(b=>b.name.toLowerCase().includes(q));
- if(!list.length){G.innerHTML='<div class="em"><div>لا توجد نتائج مطابقة.</div></div>';return}
+ if(!list.length){G.innerHTML='<div class="em" style="padding:24px 20px">لا توجد نتائج في مكتبتك.</div>';return}
  list.forEach((b,i)=>{const m=S.M[b.id]||{},n=(m.hl||[]).length,pc=m.total?Math.round(100*((m.last||0)+1)/m.total):0,h=hue(b.name);
   const c=document.createElement('div');c.className='bk';c.style.animationDelay=Math.min(i,10)*.04+'s';
   c.innerHTML='<button class="cv"><em class="tg"></em><span></span></button><button class="rm" aria-label="حذف الكتاب">'+svg('trash')+'</button><div class="bi"><div class="nm" dir="auto"></div><div class="bar"><i></i></div><div class="bm"></div></div>';
@@ -228,7 +229,6 @@ function draw(){const q=$('#q').value.trim().toLowerCase(),G=$('#grid');G.innerH
   c.querySelector('.bm').textContent=(m.total?fmt(pc)+'٪ مقروء':'القراءة لم تبدأ بعد')+(n?' · '+fmt(n)+(n===1?' تظليل':' تظليلات'):'');
   c.querySelector('.rm').onclick=async()=>{if(confirm('حذف «'+b.name+'» وجميع تظليلاته؟')){await del('books',b.id);await del('meta',b.id);lib()}};
   G.appendChild(c)})}
-$('#q').oninput=draw;
 const typeOf=f=>{const n=f.name.toLowerCase();if(/\.pdf$/.test(n)||f.type==='application/pdf')return'pdf';if(/\.epub$/.test(n))return'epub';if(/\.docx$/.test(n))return'docx';if(/\.(html?|xhtml)$/.test(n))return'html';if(/\.(md|markdown)$/.test(n))return'md';if(/\.cbz$/.test(n))return'cbz';if(/\.(txt|text)$/.test(n)||(f.type||'').startsWith('text/'))return'txt';return null};
 $('#add').onchange=async e=>{for(const f of e.target.files){const t=typeOf(f);if(!t){toast('صيغة غير مدعومة: '+f.name);continue}
  await put('books',{id:crypto.randomUUID(),name:f.name.replace(/\.[^.]+$/,''),type:t,blob:f,created:Date.now()})}
@@ -419,6 +419,32 @@ addEventListener('pointerup',()=>{if(!dr)return;const d=dr;dr=null;d.el.remove()
 addEventListener('pointercancel',()=>{if(dr){dr.el.remove();dr=null}});
 $('#pages').addEventListener('click',e=>{if(Date.now()-jd<400)e.stopImmediatePropagation()},true);
 
+/* ===== البحث على الإنترنت وتنزيل الكتب ===== */
+const AO='https://archive.org/',one=v=>String([].concat(v||'')[0]||'');
+$('#q').oninput=()=>{draw();if(!$('#q').value.trim())$('#wr').innerHTML=''};
+$('#sf').onsubmit=async e=>{e.preventDefault();$('#q').blur();const q=$('#q').value.replace(/["\\()]/g,' ').trim(),w=$('#wr');if(!q)return;
+ w.innerHTML='<div class="em">جارٍ البحث…</div>';
+ try{const p=new URLSearchParams();p.append('q','(title:('+q+') OR creator:('+q+')) AND mediatype:texts AND NOT access-restricted-item:true');
+  ['identifier','title','creator'].forEach(f=>p.append('fl[]',f));p.append('sort[]','downloads desc');p.append('rows','25');p.append('output','json');
+  const r=await fetch(AO+'advancedsearch.php?'+p);if(!r.ok)throw 0;const d=(await r.json()).response.docs;
+  w.innerHTML='<div class="gt">من الإنترنت</div><p class="wn">كتب متاحة مجانًا وبشكل قانوني من Internet Archive.</p>';if(!d.length){w.innerHTML='<div class="em">لا توجد نتائج. جرّب/ي كلمات أخرى.</div>';return}
+  d.forEach(x=>{const it=document.createElement('div');it.className='wi';it.innerHTML='<div><b dir="auto"></b><small dir="auto"></small></div><button class="btn">تنزيل</button>';
+   it.querySelector('b').textContent=nice(one(x.title)||x.identifier);it.querySelector('small').textContent=one(x.creator);
+   const b=it.querySelector('.btn');b.onclick=()=>webGet(x,b);w.appendChild(it)})
+ }catch(_){w.innerHTML='<div class="em">تعذّر البحث. تأكد/ي من الاتصال بالإنترنت.</div>'}};
+async function webGet(x,btn){btn.disabled=true;btn.textContent='جارٍ…';const page=()=>window.open(AO+'details/'+encodeURIComponent(x.identifier),'_blank');
+ try{const m=await(await fetch(AO+'metadata/'+encodeURIComponent(x.identifier))).json(),fs=(m.files||[]).filter(f=>/\.(pdf|epub)$/i.test(f.name));
+  const f=fs.find(f=>f.format==='Text PDF')||fs.find(f=>/\.pdf$/i.test(f.name))||fs[0];
+  if(!f){toast('لا يوجد ملف PDF أو EPUB لهذا الكتاب','فتح الصفحة',page);btn.disabled=false;btn.textContent='تنزيل';return}
+  const mb=(+f.size||0)/1048576;if(mb>150&&!confirm('حجم الكتاب كبير (حوالي '+Math.round(mb)+' ميجابايت). متابعة التنزيل؟')){btn.disabled=false;btn.textContent='تنزيل';return}
+  const r=await fetch(AO+'download/'+encodeURIComponent(x.identifier)+'/'+f.name.split('/').map(encodeURIComponent).join('/'));if(!r.ok)throw 0;
+  const L=+r.headers.get('content-length')||+f.size||0,rd=r.body.getReader(),ch=[];let n=0;
+  for(;;){const{done,value}=await rd.read();if(done)break;ch.push(value);n+=value.length;if(L)btn.textContent=fmt(Math.min(99,Math.round(100*n/L)))+'٪'}
+  const ext=/\.epub$/i.test(f.name)?'epub':'pdf';
+  await put('books',{id:crypto.randomUUID(),name:nice(one(x.title)||x.identifier),type:ext,blob:new Blob(ch,{type:ext==='pdf'?'application/pdf':'application/epub+zip'}),created:Date.now()});
+  navigator.storage&&navigator.storage.persist&&navigator.storage.persist();btn.textContent='تم ✓';toast('تمت إضافة الكتاب إلى مكتبتك');lib()
+ }catch(_){btn.disabled=false;btn.textContent='تنزيل';toast('تعذّر التنزيل داخل التطبيق','فتح الصفحة',page)}}
+
 /* ===== التبويبات ===== */
 let TAB='lib';
 function drawAll(){const L=$('#allhl');L.innerHTML='';
@@ -439,8 +465,8 @@ function drawAll(){const L=$('#allhl');L.innerHTML='';
    it.querySelector('.go').onclick=async()=>{await openBook(b.id);const x=S.meta&&S.meta.hl.find(y=>y.id===h.id);if(x)setTimeout(()=>jump(x),350)};L.appendChild(it)})})}
 function drawSet(){const n=S.bs.length,h=S.bs.reduce((a,b)=>a+(((S.M[b.id]||{}).hl||[]).length),0);
  $('#stt').innerHTML='<div class="st"><span>عدد الكتب</span><b>'+fmt(n)+'</b></div><div class="st"><span>عدد التظليلات</span><b>'+fmt(h)+'</b></div>'}
-function renderTab(){$('#grid').hidden=TAB!=='lib';$('#allhl').hidden=TAB!=='hls';$('#set').hidden=TAB!=='set';
- if(TAB==='lib')draw();else if(TAB==='hls')drawAll();else drawSet()}
+function renderTab(){$('#grid').hidden=TAB!=='lib';$('#allhl').hidden=TAB!=='hls';$('#set').hidden=TAB!=='set';$('#wr').hidden=TAB!=='lib';
+ if(TAB==='lib')draw();else if(TAB==='hls')drawAll();else if(TAB==='set')drawSet()}
 document.querySelectorAll('#tabs button').forEach(b=>b.onclick=()=>{TAB=b.dataset.t;$('#lib').dataset.v=TAB;
  document.querySelectorAll('#tabs button').forEach(x=>x.removeAttribute('aria-current'));b.setAttribute('aria-current','page');renderTab();scrollTo(0,0)});
 if('serviceWorker'in navigator)navigator.serviceWorker.register('sw.js').catch(()=>{});
